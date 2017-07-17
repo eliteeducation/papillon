@@ -139,19 +139,18 @@
                             <input type="text" class="form-control" id="telephone-2" placeholder="Téléphone 2">
                         </div>
 
-                        <div style="width: 18px; padding-right: 0px"><i class="fa fa-plus-circle"></i></div>
+                        <div id="plus"><i class="fa fa-plus-circle"></i></div>
                     </form>
                     <!--<div class="splitter">-->
                     <!--</div>-->
                 </div>
 
 
-                <div id="detail" class="col-md-5 " style="background-color: #00c3db">
-
+                <div id="detail" class="col-md-5 ">
 
 
                     <!--Form with header-->
-                    <div class="card">
+                    <div id="card-detail" class="card ">
                         <div class="card-block">
 
                             <!--Header-->
@@ -236,6 +235,15 @@
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="js/mdb.min.js"></script>
+<script>
+    $(function () {
+        console.log("intialisation jquery !");
+        $('#card-detail').hide();
+        $('#plus').click(function () {
+            $('#card-detail').show();
+        });
+    });
+</script>
 </body>
 
 </html>
