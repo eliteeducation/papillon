@@ -112,7 +112,7 @@
             <hr>
             <div class="row ">
 
-                <div id="master" class="col-md-7 " style="background-color: red;">
+                <div id="master" class="col-md-7" >
                     <form class="form-inline">
                         <label class="sr-only" for="inlineFormInput">Nom</label>
                         <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput"
@@ -140,6 +140,7 @@
                         </div>
 
                         <div id="plus"><i class="fa fa-plus-circle"></i></div>
+                        <div id="minus"><i class="fa fa-minus-square"></i></div>
                     </form>
                     <!--<div class="splitter">-->
                     <!--</div>-->
@@ -239,8 +240,17 @@
     $(function () {
         console.log("intialisation jquery !");
         $('#card-detail').hide();
+        $('#minus').hide();
         $('#plus').click(function () {
             $('#card-detail').show();
+            $('#minus').show();
+            $('#plus').hide();
+        });
+
+        $('#minus').click(function () {
+            $('#card-detail').hide();
+            $('#plus').show();
+            $('#minus').hide()
         });
     });
 </script>
