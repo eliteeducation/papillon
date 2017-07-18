@@ -110,9 +110,9 @@
             </div>
 
             <hr>
-            <div class="row ">
+            <div class="col-md-7">
 
-                <div id="master" class="col-md-7" >
+                <div id="master-info-client" >
                     <form class="form-inline">
                         <label class="sr-only" for="inlineFormInput">Nom</label>
                         <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput"
@@ -139,15 +139,21 @@
                             <input type="text" class="form-control" id="telephone-2" placeholder="Téléphone 2">
                         </div>
 
-                        <div id="plus"><i class="fa fa-plus-circle"></i></div>
-                        <div id="minus"><i class="fa fa-minus-square"></i></div>
+                        <div id="plus">
+                            <a  href="#detail-info-client" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="detail-info-client">
+                            <i class="fa fa-plus-circle"></i>
+                            </a>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-indigo">Enregistrer</button>
+                        </div>
                     </form>
                     <!--<div class="splitter">-->
                     <!--</div>-->
                 </div>
 
 
-                <div id="detail" class="col-md-5 ">
+                <div id="detail-info-client" class="collapse">
 
 
                     <!--Form with header-->
@@ -180,14 +186,7 @@
                                 <label for="form4"></label>
                             </div>
 
-                            <div class="text-center">
-                                <button class="btn btn-indigo">Sign up</button>
-                                <hr>
-                                <fieldset class="form-group">
-                                    <input type="checkbox" id="checkbox1">
-                                    <label for="checkbox1">Subscribe me to the newsletter</label>
-                                </fieldset>
-                            </div>
+
 
                         </div>
                     </div>
@@ -238,19 +237,19 @@
 <script>
     $(function () {
         console.log("intialisation jquery !");
-        $('#card-detail').hide();
-        $('#minus').hide();
-        $('#plus').click(function () {
-            $('#card-detail').show();
-            $('#minus').show();
-            $('#plus').hide();
-        });
-
-        $('#minus').click(function () {
-            $('#card-detail').hide();
-            $('#plus').show();
-            $('#minus').hide()
-        });
+//        $('#card-detail').hide();
+//        $('#minus').hide();
+//        $('#plus').click(function () {
+//            $('#card-detail').show();
+//            $('#minus').show();
+//            $('#plus').hide();
+//        });
+//
+//        $('#minus').click(function () {
+//            $('#card-detail').hide();
+//            $('#plus').show();
+//            $('#minus').hide()
+//        });
     });
 </script>
 </body>
