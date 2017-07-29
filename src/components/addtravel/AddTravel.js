@@ -1,6 +1,8 @@
+import zeroTime  from './utils';
+import React from 'react';
 var Col = require('react-bootstrap/lib/Col')
 var PageHeader = require('react-bootstrap/lib/PageHeader')
-var React = require('react')
+
 var Row = require('react-bootstrap/lib/Row')
 var {connect} = require('react-redux')
 var {reduxForm} = require('redux-form')
@@ -11,9 +13,9 @@ var LoadingButton = require('./LoadingButton')
 var StaticField = require('./StaticField')
 var TextInput = require('./TextInput')
 
-var {zeroTime} = require('./utils')
 
-var TODAY = zeroTime(new Date())
+
+var TODAY = zeroTime(new Date());
 
 var mapStateToProps = state => state
 
@@ -35,13 +37,19 @@ var form = reduxForm({
     }
 })
 
-var AddTravel = React.createClass({
-    getInitialState() {
-        return {
+class AddTravel extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
             fakeSaving: false,
             fakeSubmitted: null
         }
-    },
+    }
+    // getInitialState() {
+    //     return {
+    //
+    //     }
+    //}
     componentWillMount() {
         this.props.initializeForm({
             startDate: null,
@@ -51,7 +59,7 @@ var AddTravel = React.createClass({
             hotel: '',
             hasCar: 'no'
         })
-    },
+    }
 
     /**
      * Set endDate to startDate if it's blank or would otherwise be invalid.
@@ -61,11 +69,11 @@ var AddTravel = React.createClass({
         if (endDate.value == null || endDate.value < startDate) {
             endDate.onChange(startDate)
         }
-    },
+    }
     handleSubmit(data) {
-        this.setState({fakeSaving: true, fakeSubmitted: data})
-        setTimeout(() => this.setState({fakeSaving: false}), 2000)
-    },
+        this.setState({fakeSaving: true, fakeSubmitted: data});
+        setTimeout(() => this.setState({fakeSaving: false}), 2000);
+    }
 
     render() {
         var {fields} = this.props
@@ -142,6 +150,6 @@ var AddTravel = React.createClass({
             </form>
         </div>
     }
-})
+}
 
-module.exports = connect(mapStateToProps)(form(AddTravel))
+export default connect(mapStateToProps)(form(AddTravel));

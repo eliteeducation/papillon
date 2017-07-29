@@ -2,7 +2,7 @@ var {createStore} = require('redux')
 
 var rootReducer = require('./reducers')
 
-module.exports = function configureStore() {
+export default   () =>{
     var store = createStore(rootReducer)
 
     if (process.env.NODE_ENV !== 'production') {
@@ -16,4 +16,4 @@ module.exports = function configureStore() {
     }
 
     return store
-}
+};

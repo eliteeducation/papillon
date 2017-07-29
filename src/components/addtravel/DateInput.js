@@ -1,19 +1,17 @@
-var React = require('react')
-var {PropTypes} = React
+import React  from 'react';
+import PropTypes from 'prop-types';
 var DateTimePicker = require('react-widgets/lib/DateTimePicker')
 
 var FormField = require('./FormField')
 
-var DateInput = React.createClass({
-    propTypes: {
-        field: PropTypes.object.isRequired
-    },
-    shouldComponentUpdate: FormField.shouldFormFieldUpdate,
+class DateInput extends React.Component {
+
+
     render() {
-        var {field, help, label, afterChange, ...inputProps} = this.props
-        var onChange = field.onChange
+        let {field, help, label, afterChange, ...inputProps} = this.props;
+        let onChange = field.onChange
         if (afterChange) {
-            onChange = function(...args) {
+            onChange = function (...args) {
                 field.onChange(...args)
                 afterChange(...args)
             }
@@ -29,6 +27,10 @@ var DateInput = React.createClass({
             />
         </FormField>
     }
-})
+}
+DateInput.propTypes = {
+    field: PropTypes.object.isRequired
+};
 
-module.exports = DateInput
+DateInput.shouldComponentUpdate = FormField.shouldFormFieldUpdate;
+    export default DateInput;

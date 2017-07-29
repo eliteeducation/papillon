@@ -1,8 +1,11 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 var classNames = require('classnames')
+
 var Col = require('react-bootstrap/lib/Col')
-var React = require('react')
+
 var Row = require('react-bootstrap/lib/Row')
-var {PropTypes} = React
+
 
 var Help = require('./Help')
 var Loading = require('./Loading')
@@ -59,34 +62,18 @@ function shouldFormFieldUpdate(nextProps) {
  *
  * The form input itself should be passed as content.
  */
-var FormField = React.createClass({
-    statics: {
-        shouldFormFieldUpdate
-    },
-    propTypes: {
-        // A redux-form field object
-        field: PropTypes.object,
-        // Help text to be displayed next to the label
-        help: PropTypes.string,
-        // An additional class to be applied to the input container
-        inputClass: PropTypes.string,
-        // Props used for the input (id is used to link the label to the input)
-        inputProps: PropTypes.object,
-        // Label text
-        label: PropTypes.string,
-        // Loading state
-        loading: PropTypes.bool
-    },
-    getDefaultProps() {
-        return {
-            field: {},
-            inputProps: {}
-        }
-    },
+class FormField extends React.Component {
+    constructor(props) {
+        super(props)
+        props.field = {}
+        props.inputProps = {}
+    }
+
+
     render() {
         var {field, help, inputClass, inputProps, label, loading} = this.props
         var error = field.touched && field.error
-        return <Col sm={6}>
+        return (<Col sm={6}>
             <Row className={classNames('form-group', {'has-error': error})}>
                 <Col sm={4} className="control-label">
                     {loading && <Loading inline/>} <label htmlFor={inputProps.id}>{label}</label>
@@ -97,8 +84,27 @@ var FormField = React.createClass({
                     {error && <p className="help-block" style={{marginBottom: 0}}>{error}</p>}
                 </Col>
             </Row>
-        </Col>
+        </Col>)
     }
-})
+}
 
-module.exports = FormField
+FormField.statics = {
+    shouldFormFieldUpdate
+}
+
+FormField.propTypes = {
+    // A redux-form field object
+    field: PropTypes.object,
+    // Help text to be displayed next to the label
+    help: PropTypes.string,
+    // An additional class to be applied to the input container
+    inputClass: PropTypes.string,
+    // Props used for the input (id is used to link the label to the input)
+    inputProps: PropTypes.object,
+    // Label text
+    label: PropTypes.string,
+    // Loading state
+    loading: PropTypes.bool
+}
+
+export default FormField;

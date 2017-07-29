@@ -1,20 +1,23 @@
 import './Help.css';
-
+import PropTypes from 'prop-types';
+import React,{Component}  from 'react';
 var Glyphicon = require('react-bootstrap/lib/Glyphicon')
 var OverlayTrigger = require('react-bootstrap/lib/OverlayTrigger')
-import {Component}  from 'react';
+
 var Tooltip = require('react-bootstrap/lib/Tooltip')
 
 class Help extends Component {
 
     render() {
         var tooltip = <Tooltip>{this.props.text}</Tooltip>
-        return <OverlayTrigger overlay={tooltip} delayShow={300} delayHide={150}>
+        return (
+        <OverlayTrigger overlay={tooltip} delayShow={300} delayHide={150}>
             <Glyphicon className="Help" glyph="question-sign"/>
         </OverlayTrigger>
+        );
     }
 }
 Help.propTypes ={
-    text: React.PropTypes.string.isRequired
+    text: PropTypes.string.isRequired
 }
-module.exports = Help
+export default Help;
