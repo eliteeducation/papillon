@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field, FieldArray, reduxForm } from 'redux-form';
 import validate from './validate'
-
+import InfoPersoForm from '../InfoPersoForm'
 const renderField = ({ input, label, type, meta: { touched, error } }) =>
     <div>
         <label>
@@ -17,11 +17,11 @@ const renderField = ({ input, label, type, meta: { touched, error } }) =>
         </div>
     </div>
 
-const renderNumTelephones = ({ fields, meta: { error } }) =>
+const renderEnfants = ({ fields, meta: { error } }) =>
     <ul>
         <li>
             <button type="button" onClick={() => fields.push()}>
-                Nouveau Téléphone
+                Ajouter un enfant
             </button>
         </li>
         {fields.map((hobby, index) =>
@@ -45,17 +45,13 @@ const renderNumTelephones = ({ fields, meta: { error } }) =>
         </li>}
     </ul>
 
-const renderMembers = ({ fields, meta: { error, submitFailed } }) =>
+const renderClients = ({ fields, meta: { error, submitFailed } }) =>
     <ul>
         <li>
             <button type="button" onClick={() => fields.push({})}>
-                Add Member
+                Nouveau Client
             </button>
-            {submitFailed &&
-            error &&
-            <span>
-          {error}
-        </span>}
+            {submitFailed && error && <span> {error}</span>}
         </li>
         {fields.map((member, index) =>
             <li key={index}>
@@ -67,40 +63,32 @@ const renderMembers = ({ fields, meta: { error, submitFailed } }) =>
                 <h4>
                     Member #{index + 1}
                 </h4>
-                <Field
-                    name={`${member}.firstName`}
-                    type="text"
-                    component={renderField}
-                    label="First Name"
-                />
-                <Field
-                    name={`${member}.lastName`}
-                    type="text"
-                    component={renderField}
-                    label="Last Name"
-                />
-                <FieldArray name={`${member}.hobbies`} component={renderNumTelephones} />
+
+                <InfoPersoForm data={member} renderField={renderField} />
+                <FieldArray name={`${member}.hobbies`} component={renderEnfants} />
             </li>
         )}
     </ul>
+
+
 
 const NewParentForm = props => {
     const { handleSubmit, pristine, reset, submitting } = props
     return (
         <form onSubmit={handleSubmit}>
-            <Field
-                name="clubName"
-                type="text"
-                component={renderField}
-                label="Club Name"
-            />
-            <FieldArray name="members" component={renderMembers} />
+            {/*<Field*/}
+                {/*name="clubName"*/}
+                {/*type="text"*/}
+                {/*component={renderField}*/}
+                {/*label="Club Name"*/}
+            {/*/>*/}
+            <FieldArray name="clients" component={renderClients} />
             <div>
                 <button type="submit" disabled={submitting}>
-                    Submit
+                    Enregistrer
                 </button>
                 <button type="button" disabled={pristine || submitting} onClick={reset}>
-                    Clear Values
+                    Effacer la saisie
                 </button>
             </div>
         </form>
