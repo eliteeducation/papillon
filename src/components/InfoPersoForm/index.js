@@ -4,16 +4,19 @@
 
 import React from 'react'
 import { Field, FieldArray, reduxForm } from 'redux-form';
+import './index.css';
+
 const InfoPersoForm = ({data, renderField})=>{
     console.log("member = ", data);
     const member = data;
     return (
-        <diV>
+        <div className='.InfoPersoForm-container'>
             <Field
                 name={`${member}.firstName`}
                 type="text"
                 component={renderField}
                 label="Prénoms"
+               
             />
             <Field
                 name={`${member}.lastName`}
@@ -45,6 +48,6 @@ const InfoPersoForm = ({data, renderField})=>{
                 component={renderField}
                 label="Adresse"
             />
-        </diV>)
+        </div>)
 }
 export default InfoPersoForm;

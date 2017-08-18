@@ -1,38 +1,33 @@
 import React from 'react'
-import { Field, FieldArray, reduxForm } from 'redux-form';
+import {Field, FieldArray, reduxForm} from 'redux-form';
 import validate from './validate'
 import InfoPersoForm from '../InfoPersoForm'
-const renderField = ({ input, label, type, meta: { touched, error } }) =>
-    <div>
+import InfoEleveForm from '../InfoEleveForm'
+const renderField = ({input, label, type, className, meta: {touched, error}}) =>
+    <div className={className}>
         <label>
             {label}
         </label>
         <div>
-            <input {...input} type={type} placeholder={label} />
-            {touched &&
-            error &&
-            <span>
-          {error}
-        </span>}
+            <input {...input} type={type} placeholder={label}/>
+            {touched && error && <span> {error} </span>}
         </div>
     </div>
 
-const renderEnfants = ({ fields, meta: { error } }) =>
+const renderEnfants = ({fields, meta: {error}}) =>
     <ul>
-        <li>
+        <div>
             <button type="button" onClick={() => fields.push()}>
                 Ajouter un enfant
             </button>
-        </li>
-        {fields.map((hobby, index) =>
+        </div>
+        {fields.map((child, index) =>
             <li key={index}>
-                <button
-                    type="button"
-                    title="supprimer Téléphone"
-                    onClick={() => fields.remove(index)}
-                />
+
+                <InfoPersoForm data={child} renderField={renderField}/>
+                <InfoEleveForm data={child} renderField={renderField}/>
                 <Field
-                    name={hobby}
+                    name={child}
                     type="text"
                     component={renderField}
                     label={`Téléphone #${index + 1}`}
@@ -45,7 +40,7 @@ const renderEnfants = ({ fields, meta: { error } }) =>
         </li>}
     </ul>
 
-const renderClients = ({ fields, meta: { error, submitFailed } }) =>
+const renderClients = ({fields, meta: {error, submitFailed}}) =>
     <ul>
         <li>
             <button type="button" onClick={() => fields.push({})}>
@@ -53,7 +48,7 @@ const renderClients = ({ fields, meta: { error, submitFailed } }) =>
             </button>
             {submitFailed && error && <span> {error}</span>}
         </li>
-        {fields.map((member, index) =>
+        {fields.map((client, index) =>
             <li key={index}>
                 <button
                     type="button"
@@ -63,26 +58,21 @@ const renderClients = ({ fields, meta: { error, submitFailed } }) =>
                 <h4>
                     Member #{index + 1}
                 </h4>
-
-                <InfoPersoForm data={member} renderField={renderField} />
-                <FieldArray name={`${member}.hobbies`} component={renderEnfants} />
+                <InfoPersoForm data={client} renderField={renderField}/>
+                <div>
+                    <FieldArray name={`${client}.children`} component={renderEnfants}/>
+                </div>
             </li>
         )}
     </ul>
 
 
-
 const NewParentForm = props => {
-    const { handleSubmit, pristine, reset, submitting } = props
-    return (
+    const {handleSubmit, pristine, reset, submitting} = props
+        return (
         <form onSubmit={handleSubmit}>
-            {/*<Field*/}
-                {/*name="clubName"*/}
-                {/*type="text"*/}
-                {/*component={renderField}*/}
-                {/*label="Club Name"*/}
-            {/*/>*/}
-            <FieldArray name="clients" component={renderClients} />
+
+            <FieldArray name="clients" component={renderClients}/>
             <div>
                 <button type="submit" disabled={submitting}>
                     Enregistrer
