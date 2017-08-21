@@ -6,11 +6,20 @@
 import React from 'react'
 import { Field, FieldArray, reduxForm } from 'redux-form';
 import {Classes} from '../../common/Constants'
+import TextField from 'material-ui/TextField';
+
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+
+const fixerLaClasse = ()=> {
+
+}
 const InfoEleveForm = ({data, renderField})=>{
     console.log("member = ", data);
     const member = data;
     return (
         <form>
+            <TextField floatingLabelText="Nom" />
             <Field
                 name={`${member}.etablissement`}
                 type="text"
@@ -20,9 +29,17 @@ const InfoEleveForm = ({data, renderField})=>{
             <div>
                 <label>Classe</label>
                 <div>
+                    <SelectField
+                        floatingLabelText="Classe"
+                        value={this.state.value}
+                        onChange={fixerLaClasse} >
+
+                        {Object.keys(Classes).map((key, index)=> <MenuItem key={key} value={index} primaryText={key}/> )}
+                    </SelectField>
+
                     <Field name="classe" component="select">
                         <option></option>
-                        {Object.keys(Classes).map((key, index)=> <option key={key} value={index}>{key}</option>)}
+
 
                     </Field>
                 </div>

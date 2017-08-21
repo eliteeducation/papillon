@@ -3,11 +3,33 @@ import logo from './logo.svg';
 import './App.css';
 import {prospects} from './lib/firebase'
 import AutoCompleteExampleDataSource from './common/Autocomplete'
-// import {Tab, Tabs} from 'react-bootstrap';
-//
-// import ContactForm from './components/contactform/ContactForm';
-//import NewParentForm from './components/parent/NewParentForm';
+import ProspectForm from './client/ProspectForm'
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import {Tabs, Tab} from 'material-ui/Tabs';
+import Slider from 'material-ui/Slider';
 
+import RaisedButton from 'material-ui/RaisedButton';
+
+const style = {
+    margin: 12,
+};
+
+const styles = {
+    headline: {
+        fontSize: 24,
+        paddingTop: 16,
+        marginBottom: 12,
+        fontWeight: 400,
+    },
+    addButton: {
+        margin: 12,
+    }
+};
+
+function handleActive(tab) {
+    alert(`A tab with this route property ${tab.props['data-route']} was activated.`);
+}
 class App extends Component {
     constructor(props) {
         super(props);
@@ -49,67 +71,45 @@ class App extends Component {
                     <h2>Bienvenu sur paillon</h2>
                 </div>
                 <div className=".form-nouvProspect">
-                    <button className=".btn-nouvProspect" onClick={this.showProspectForm}>Nouveau Prospect</button>
 
-
-                    <form className=".form-nouvProspectInfo" onSubmit={this.handleSubmit}>
-
-                        <div>
-                            <label>Nom</label>
-                            <input type="text" name="" ref={(input) => this.nomInput = input}/>
-                        </div>
-                        <div>
-                            <label>Prénoms</label>
-                            <input type="text" name="" ref={(input) => this.prenomInput = input}/>
-                        </div>
-                        <div>
-                            <label>Adresse</label>
-                            <input type="text" name="" ref={(input) => this.adresseInput = input}/>
-                        </div>
-                        <div>
-                            <label>Téléphone</label>
-                            <input type="text" name="" ref={(input) => this.telephone1Input = input}/>
-                        </div>
-                        <div>
-                            <label>Téléphone 2 </label>
-                            <input type="text" name="" ref={(input) => this.telephone2Input = input}/>
-                        </div>
-
-                        <div>
-                            <button type="submit">Créer</button>
-                            <button type="button" >
-                               Effacer
-                            </button>
-                        </div>
-                    </form>
-
-                    <form className=".form-nouvChilddrenInfo">
-                        <div>
-                            <label>Nom</label>
-                            <input type="text" name="" ref={(input) => this.nomInput = input}/>
-                        </div>
-                        <div>
-                            <label>Prénoms</label>
-                            <input type="text" name="" ref={(input) => this.prenomInput = input}/>
-                        </div>
-                        <div>
-                            <label>Adresse</label>
-                            <input type="text" name="" ref={(input) => this.adresseInput = input}/>
-                        </div>
-                        <div>
-                            <label>Téléphone</label>
-                            <input type="text" name="" ref={(input) => this.telephone1Input = input}/>
-                        </div>
-                        <div>
-                            <label>Classe</label>
-                            <input type="text" name="" ref={(input) => this.telephone2Input = input}/>
-                        </div>
-                    </form>
-
-<AutoCompleteExampleDataSource />
                 </div>
-                {/*< NewParentForm handleSubmit={this.storeResults}/>*/}
 
+                <Tabs>
+                    <Tab label="Prospects">
+                        <div>
+                            <h2 style={styles.headline}>Tab One</h2>
+                            <RaisedButton label="Nouveau" primary={true} style={styles.addButton}/>
+                            <ProspectForm />
+                            <p>
+                                You can put any sort of HTML or react component in here. It even keeps the component
+                                state!
+                            </p>
+                            <Slider name="slider0" defaultValue={0.5}/>
+                        </div>
+                    </Tab>
+                    <Tab label="Clients">
+                        <div>
+                            <h2 style={styles.headline}>Tab Two</h2>
+                            <RaisedButton label="Nouveau" primary={true} style={styles.addButton}/>
+                            <p>
+                                This is another example tab.
+                            </p>
+                        </div>
+                    </Tab>
+                    <Tab
+                        label="Enseignants"
+                        data-route="/home"
+                        onActive={handleActive}
+                    >
+                        <div>
+                            <h2 style={styles.headline}>Tab Three</h2>
+                            <RaisedButton label="Nouveau" primary={true} style={styles.addButton}/>
+                            <p>
+                                This is a third example tab.
+                            </p>
+                        </div>
+                    </Tab>
+                </Tabs>
 
             </div>
         );
