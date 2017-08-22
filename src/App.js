@@ -6,7 +6,7 @@ import AutoCompleteExampleDataSource from './common/Autocomplete'
 import ProspectForm from './client/ProspectForm'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Accueil from './common/Accueil'
-import LoginForm from './common/login'
+import LoginForm from './common/login/LoginForm'
 import RaisedButton from 'material-ui/RaisedButton';
 import firebase from './lib/firebase';
 

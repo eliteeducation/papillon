@@ -2,6 +2,7 @@
  * Created by emma on 18/08/17.
  */
 
+import React from 'react';
 
 const CM1 = Symbol();
 const CM2 = Symbol();
