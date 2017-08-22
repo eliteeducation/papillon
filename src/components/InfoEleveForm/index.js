@@ -7,48 +7,62 @@ import React from 'react'
 import { Field, FieldArray, reduxForm } from 'redux-form';
 import {Classes} from '../../common/Constants'
 import TextField from 'material-ui/TextField';
-
+import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
-const fixerLaClasse = ()=> {
 
-}
-const InfoEleveForm = ({data, renderField})=>{
+const styles = {
+    block: {
+        maxWidth: 250,
+    },
+    radioButton: {
+        marginBottom: 16,
+    },
+};
+const InfoEleveForm = ({data, onClasseChange, onEtablissementChange})=>{
     console.log("member = ", data);
-    const member = data;
+    const enfant = data;
+    enfant.etablissement='';
+    enfant.classe='';
+
     return (
         <form>
-            <TextField floatingLabelText="Nom" />
-            <Field
-                name={`${member}.etablissement`}
-                type="text"
-                component={renderField}
-                label="Etablissement fréquenté"
-            />
+            <TextField floatingLabelText="Etablissement"  value={enfant.etablissement} onChange={onEtablissementChange}/>
+
             <div>
                 <label>Classe</label>
                 <div>
                     <SelectField
                         floatingLabelText="Classe"
-                        value={this.state.value}
-                        onChange={fixerLaClasse} >
+                        value={enfant.classe}
+                        onChange={onClasseChange} >
 
                         {Object.keys(Classes).map((key, index)=> <MenuItem key={key} value={index} primaryText={key}/> )}
                     </SelectField>
 
-                    <Field name="classe" component="select">
-                        <option></option>
 
-
-                    </Field>
                 </div>
             </div>
             <div>
                 <label>Programme</label>
                 <div>
-                    <label><Field name={`${member}.programme`} component="input" type="radio" value="male"/> Français</label>
-                    <label><Field name={`${member}.programme`} component="input" type="radio" value="female"/> Ivoirien </label>
+
+                    <RadioButtonGroup name="shipName" defaultSelected="Ivoirien" labelPosition="left">
+                        <RadioButton
+                            value="Ivoirien"
+                            label="Ivoirien"
+
+                            style={styles.radioButton}
+                        />
+                        <RadioButton
+                            value="Français"
+                            label="Français"
+
+                            style={styles.radioButton}
+                        />
+                    </RadioButtonGroup>
+
                 </div>
             </div>
 

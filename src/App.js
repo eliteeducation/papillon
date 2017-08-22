@@ -5,9 +5,7 @@ import {prospects} from './lib/firebase'
 import AutoCompleteExampleDataSource from './common/Autocomplete'
 import ProspectForm from './client/ProspectForm'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import {Tabs, Tab} from 'material-ui/Tabs';
-import Slider from 'material-ui/Slider';
+import Accueil from './common/Accueil'
 
 import RaisedButton from 'material-ui/RaisedButton';
 
@@ -15,21 +13,8 @@ const style = {
     margin: 12,
 };
 
-const styles = {
-    headline: {
-        fontSize: 24,
-        paddingTop: 16,
-        marginBottom: 12,
-        fontWeight: 400,
-    },
-    addButton: {
-        margin: 12,
-    }
-};
 
-function handleActive(tab) {
-    alert(`A tab with this route property ${tab.props['data-route']} was activated.`);
-}
+
 class App extends Component {
     constructor(props) {
         super(props);
@@ -70,47 +55,8 @@ class App extends Component {
                     <img src={logo} className="App-logo" alt="logo"/>
                     <h2>Bienvenu sur paillon</h2>
                 </div>
-                <div className=".form-nouvProspect">
 
-                </div>
-
-                <Tabs>
-                    <Tab label="Prospects">
-                        <div>
-                            <h2 style={styles.headline}>Tab One</h2>
-                            <RaisedButton label="Nouveau" primary={true} style={styles.addButton}/>
-                            <ProspectForm />
-                            <p>
-                                You can put any sort of HTML or react component in here. It even keeps the component
-                                state!
-                            </p>
-                            <Slider name="slider0" defaultValue={0.5}/>
-                        </div>
-                    </Tab>
-                    <Tab label="Clients">
-                        <div>
-                            <h2 style={styles.headline}>Tab Two</h2>
-                            <RaisedButton label="Nouveau" primary={true} style={styles.addButton}/>
-                            <p>
-                                This is another example tab.
-                            </p>
-                        </div>
-                    </Tab>
-                    <Tab
-                        label="Enseignants"
-                        data-route="/home"
-                        onActive={handleActive}
-                    >
-                        <div>
-                            <h2 style={styles.headline}>Tab Three</h2>
-                            <RaisedButton label="Nouveau" primary={true} style={styles.addButton}/>
-                            <p>
-                                This is a third example tab.
-                            </p>
-                        </div>
-                    </Tab>
-                </Tabs>
-
+                <Accueil/>
             </div>
         );
     }
