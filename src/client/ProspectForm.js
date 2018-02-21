@@ -3,14 +3,13 @@
  */
 
 
-import React from 'react';
-import TextField from 'material-ui/TextField';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import {clients} from '../lib/firebase'
-import InfoEleveForm from '../components/InfoEleveForm'
+import React from "react";
+import TextField from "material-ui/TextField";
+import Button from "material-ui/Button";
+import ContentAdd from "material-ui/svg-icons/content/add";
+import FloatingActionButton from "../components/FloatingActionButton";
+import {clients} from "../lib/firebase";
+import InfoEleveForm from "../components/InfoEleveForm";
 
 
 const style = {
@@ -95,18 +94,32 @@ class ProspectForm extends React.Component {
         })
     }
 
-    onClasseChange = (event)=>{
+    preventEnterKey = e => {
+        if (e.key === "Enter" && e.target.tagName.toLowerCase() !== "textarea") {
+            e.preventDefault();
+            var node = e.target.nextSibling;
+            while (node) {
+                if (node.tagName === "INPUT" || node.tagName === "SELECT") {
+                    node.focus();
+                    break;
+                }
+                node = node.nextSibling;
+            }
+        }
+    };
+    onClasseChange = (event)=> {
         this.state.enfants[this.state.enfants.length - 1].classe = event.target.value;
     }
 
-    onEtablissementChange = (event)=>{
+    onEtablissementChange = (event)=> {
         this.state.enfants[this.state.enfants.length - 1].etablissement = event.target.value;
     }
 
     render() {
         let {adresseProspect, nomProspect, prenomsProspect, telephonePropect1, telephonePropect2, enfants} = this.state;
         return (
-            <div>
+
+            <form onSubmit={this.handleSubmit} onKeyPress={this.preventEnterKey}>
 
                 <TextField value={this.state.nomProspect} floatingLabelText="Nom"
                            onChange={this.handleNomProspectChange}/>
@@ -132,13 +145,14 @@ class ProspectForm extends React.Component {
                 <FloatingActionButton onClick={this.ajouterEnfant} style={style}>
                     <ContentAdd  />
                 </FloatingActionButton>
-                {enfants && enfants.length>0 &&
-                <InfoEleveForm data={enfants[enfants.length - 1]} onClasseChange={this.onClasseChange} onEtablissementChange={this.onEtablissementChange}/> }
+                {enfants && enfants.length > 0 &&
+                <InfoEleveForm data={enfants[enfants.length - 1]} onClasseChange={this.onClasseChange}
+                               onEtablissementChange={this.onEtablissementChange}/> }
 
-
+                <Button type="submit" data-e2b-id="validate-case-form">Valider</Button>
                 <br />
 
-            </div>
+            </form>
         );
     }
 

@@ -2,12 +2,10 @@
  * Created by emma on 22/08/17.
  */
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {Tabs, Tab} from 'material-ui/Tabs';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import RaisedButton from 'material-ui/RaisedButton';
-import ProspectForm from '../../client/ProspectForm'
+import React from "react";
+import {Tabs, Tab} from "material-ui/Tabs";
+import Button from "material-ui/Button";
+import ProspectForm from "../../client/ProspectForm";
 const styles = {
     headline: {
         fontSize: 24,
@@ -27,7 +25,10 @@ const Accueil = () => {
         <Tab label="Prospects">
             <div>
                 <h2 style={styles.headline}>Les prospects</h2>
-                <RaisedButton label="Nouveau" primary={true} style={styles.addButton}/>
+
+                <Button variant="raised" color="secondary" style={styles.addButton} >
+                    Nouveau
+                </Button>
                 <ProspectForm />
             </div>
         </Tab>
@@ -35,7 +36,10 @@ const Accueil = () => {
         <Tab label="Clients">
             <div>
                 <h2 style={styles.headline}>Les clients</h2>
-                <RaisedButton label="Nouveau" primary={true} style={styles.addButton}/>
+
+                <Button variant="raised" color="secondary" style={styles.addButton} >
+                    Nouveau
+                </Button>
             </div>
         </Tab>
 
@@ -44,7 +48,10 @@ const Accueil = () => {
              onActive={handleActive}>
             <div>
                 <h2 style={styles.headline}>Les enseignants</h2>
-                <RaisedButton label="Nouveau" primary={true} style={styles.addButton}/>
+
+                <Button variant="raised" color="secondary" style={styles.addButton} >
+                    Nouveau
+                </Button>
             </div>
         </Tab>
     </Tabs>

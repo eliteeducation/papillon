@@ -7,9 +7,11 @@ import React from 'react'
 import { Field, FieldArray, reduxForm } from 'redux-form';
 import {Classes} from '../../common/Constants'
 import TextField from 'material-ui/TextField';
-import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+/*import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';*/
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+
+import Radio, { RadioGroup } from 'material-ui/Radio';
 
 
 const styles = {

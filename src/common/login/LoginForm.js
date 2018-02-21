@@ -6,7 +6,7 @@ import React,  {Component} from 'react';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
-import RaisedButton from 'material-ui/RaisedButton';
+import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 
 
@@ -40,7 +40,9 @@ class LoginForm extends Component {
                             onChange = {(event,newValue) => this.setState({password:newValue})}
                         />
                         <br/>
-                        <RaisedButton label="Submit" primary={true} style={style} onClick={onLogin}/>
+                        <Button variant="raised" color="secondary" style={style}onClick={onLogin}>
+                            Submit
+                        </Button>
                     </div>
                 </MuiThemeProvider>
             </div>
