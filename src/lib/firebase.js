@@ -14,6 +14,27 @@ var config = {
     messagingSenderId: "17500589997"
 };
 firebase.initializeApp(config);
+firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+
+        var displayName = user.displayName;
+        var email = user.email;
+        var emailVerified = user.emailVerified;
+        var photoURL = user.photoURL;
+        var isAnonymous = user.isAnonymous;
+        var uid = user.uid;
+        var providerData = user.providerData;
+
+    } else {
+
+    }
+});
 
 
-export const prospects = firebase.database().ref("propsects");
+export const clients =  firebase.database().ref("clients");
+export const enseignants =  firebase.database().ref("enseignants");
+export const eleves =  firebase.database().ref("eleves");
+export const matieres =  firebase.database().ref("matieres");
+export const etablissements =  firebase.database().ref("etablissements");
+export const rendezVous =  firebase.database().ref("rendezVous");
+export const partenaires =  firebase.database().ref("partenaires");

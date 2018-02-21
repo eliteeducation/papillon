@@ -19,6 +19,7 @@ class LoginForm extends Component {
         }
     }
     render() {
+        const {onLogin} = this.props;
         return (
             <div>
                 <MuiThemeProvider>
@@ -39,7 +40,7 @@ class LoginForm extends Component {
                             onChange = {(event,newValue) => this.setState({password:newValue})}
                         />
                         <br/>
-                        <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => this.handleClick(event)}/>
+                        <RaisedButton label="Submit" primary={true} style={style} onClick={onLogin}/>
                     </div>
                 </MuiThemeProvider>
             </div>

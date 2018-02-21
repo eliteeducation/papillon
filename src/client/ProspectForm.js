@@ -9,7 +9,7 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
-import {prospects} from '../lib/firebase'
+import {clients} from '../lib/firebase'
 import InfoEleveForm from '../components/InfoEleveForm'
 
 
@@ -86,7 +86,7 @@ class ProspectForm extends React.Component {
         let adresse = this.adresseInput.value;
         let telephone1 = this.telephone1Input.value;
         let telephone2 = this.telephone2Input.value;
-        prospects.push({
+        clients.push({
             'nom': nom,
             'prenom': prenom,
             'adresse': adresse,
