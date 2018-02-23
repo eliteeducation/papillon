@@ -11,6 +11,7 @@ import FloatingActionButton from "../components/FloatingActionButton";
 import {clients} from "../lib/firebase";
 import InfoEleveForm from "../components/InfoEleveForm";
 import AddIcon from 'material-ui-icons/Add';
+import Divider from 'material-ui/Divider';
 const style = {
     headline: {
         fontSize: 24,
@@ -131,7 +132,7 @@ class ProspectForm extends React.Component {
                            onChange={this.handlePrenomsProspectChange}/><br />
                 <TextField label="Téléphone #1" value={telephonePropect1}
                            onChange={this.handleTelephonePropect1Change}/>
-                <TextField label="Téléphone #2" value={telephonePropect2}
+                <TextField  label="Téléphone #2" value={telephonePropect2}
                            onChange={this.handleTelephonePropect2Change}/><br />
 
                 <br />
@@ -143,6 +144,7 @@ class ProspectForm extends React.Component {
                            multiLine={true}
                            rows={3}/>
                 <br />
+                <Divider />
 
 
                 {enfants && enfants.length > 0 &&
