@@ -1,16 +1,21 @@
 import React from "react";
-import {Field, FieldArray, reduxForm} from "redux-form";
 import TextField from "material-ui/TextField";
 import PropTypes from "prop-types";
 import {withStyles} from "material-ui/styles";
 import Select from "material-ui/Select";
 import Input, {InputLabel} from "material-ui/Input";
 import {MenuItem} from "material-ui/Menu";
-import {FormLabel, FormControl, FormControlLabel, FormHelperText} from "material-ui/Form";
+import {FormControl, FormControlLabel, FormHelperText} from "material-ui/Form";
 import Radio, {RadioGroup} from "material-ui/Radio";
-import Divider from "material-ui/Divider";
 import MatiereList from "../MatiereList";
-import {Classes} from "../../common/Constants"
+import {Classes} from "../../common/Constants";
+import Grid from "material-ui/Grid";
+import ExpansionPanel, {
+    ExpansionPanelSummary,
+    ExpansionPanelDetails,
+} from 'material-ui/ExpansionPanel';
+import Typography from 'material-ui/Typography';
+import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
 const styles = theme => ({
     root: {
         display: 'flex',
@@ -52,56 +57,69 @@ class InfoEleveForm extends React.Component {
     }
 
     //   const { classes } = this.props;
+//
     render() {
         let {data, onClasseChange, classes} = this.props
         let {etablissement} = this.state;
         return (
-            <div className={classes.root}>
-                <FormControl component="fieldset" required className={classes.formControl}>
-                    <TextField label="Nom de l'enfant" value={etablissement} onChange={this.onEtablissementChange}/>
-                    <TextField label="Prénoms de l'enfant" value={etablissement}
-                               onChange={this.onEtablissementChange}/>
-                    <TextField label="Classe de l'enfant" value={etablissement}
-                               onChange={this.onEtablissementChange}/>
-                    <TextField label="Etablissement" value={etablissement} onChange={this.onEtablissementChange}/>
-                    <TextField label="Nom de l'enseignant" value={etablissement}
-                               onChange={this.onEtablissementChange}/>
+            <Grid sm={12}>
+                <ExpansionPanel>
+                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                        <Typography className={classes.heading}>Nom de l'enfant</Typography>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                        <Grid container>
+                            <Grid item md={4} xs={12}>
+                                <FormControl component="fieldset" required className={classes.formControl}>
+                                    <TextField label="Nom de l'enfant" value={etablissement}
+                                               onChange={this.onEtablissementChange}/>
+                                    <TextField label="Prénoms de l'enfant" value={etablissement}
+                                               onChange={this.onEtablissementChange}/>
+                                    <TextField label="Classe de l'enfant" value={etablissement}
+                                               onChange={this.onEtablissementChange}/>
+                                    <TextField label="Etablissement" value={etablissement}
+                                               onChange={this.onEtablissementChange}/>
+                                    <TextField label="Nom de l'enseignant" value={etablissement}
+                                               onChange={this.onEtablissementChange}/>
 
+                                </FormControl>
+                            </Grid>
+                            <Grid item md={4} xs={12}>
+                                <FormControl className={classes.formControl}>
+                                    <InputLabel htmlFor="choix-classe">Classes</InputLabel>
+                                    <Select
+                                        value={this.state.age}
+                                        onChange={this.handleChange}
+                                        input={<Input name="classe" id="choix-classe"/>}>
+                                        <MenuItem value="">
+                                            <em>None</em>
+                                        </MenuItem>
+                                        {  Classes.map(cl=> <MenuItem key={cl.nom} value={10}>{cl.nom}</MenuItem>)}
 
-                </FormControl>
-                <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="choix-classe">Classes</InputLabel>
-                    <Select
-                        value={this.state.age}
-                        onChange={this.handleChange}
-                        input={<Input name="classe" id="choix-classe"/>}>
-                        <MenuItem value="">
-                            <em>None</em>
-                        </MenuItem>
-                        {  Classes.map(cl=> <MenuItem key={cl.nom} value={10}>{cl.nom}</MenuItem>)}
+                                    </Select>
+                                    <FormHelperText>Some important helper text</FormHelperText>
+                                </FormControl>
+                            </Grid>
+                            <Grid item md={4} sm={12}>
+                                <div>
+                                    <label>Matieres</label>
+                                    <MatiereList/>
+                                </div>
+                                <FormControl className={classes.formControl}>
+                                    <InputLabel >Programme</InputLabel>
+                                    <RadioGroup name="shipName">
+                                        <FormControlLabel value="Ivoirien" control={<Radio />} label="Ivoirien"/>
+                                        <FormControlLabel value="Francais" control={<Radio />} label="Francais"/>
+                                        <FormControlLabel value="Americain" control={<Radio />} label="Americain"/>
+                                    </RadioGroup>
+                                </FormControl>
+                            </Grid>
+                        </Grid>
+                    </ExpansionPanelDetails>
+                </ExpansionPanel>
+            </Grid>
 
-                    </Select>
-                    <FormHelperText>Some important helper text</FormHelperText>
-                </FormControl>
-                <Divider/>
-                <div>
-                    <label>Matieres</label>
-                    <MatiereList/>
-                </div>
-                <FormControl className={classes.formControl}>
-                    <InputLabel >Programme</InputLabel>
-                    <RadioGroup name="shipName" defaultSelected="Ivoirien" labelPosition="left">
-                        <FormControlLabel value="Ivoirien" control={<Radio />} label="Ivoirien"/>
-                        <FormControlLabel value="Francais" control={<Radio />} label="Francais"/>
-                        <FormControlLabel value="Americain" control={<Radio />} label="Americain"/>
-                    </RadioGroup>
-
-
-                </FormControl>
-                <Divider/>
-
-
-            </div>)
+        )
     }
 }
 

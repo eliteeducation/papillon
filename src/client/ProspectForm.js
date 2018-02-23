@@ -6,12 +6,10 @@
 import React from "react";
 import TextField from "material-ui/TextField";
 import Button from "material-ui/Button";
-import ContentAdd from "material-ui-icons/Add";
-import FloatingActionButton from "../components/FloatingActionButton";
+import AddIcon from "material-ui-icons/Add";
 import {clients} from "../lib/firebase";
 import InfoEleveForm from "../components/InfoEleveForm";
-import AddIcon from 'material-ui-icons/Add';
-import Divider from 'material-ui/Divider';
+import Grid from "material-ui/Grid";
 const style = {
     headline: {
         fontSize: 24,
@@ -51,8 +49,9 @@ class ProspectForm extends React.Component {
     ajouterEnfant = () => {
         this.setState((prevState, props) => {
             enfants : prevState.enfants.push({})
-        })
+        });
         console.log("taille tableau : ", this.state.enfants.length);
+        console.log("Les enfants: ", this.state.enfants);
     }
 
     handleNomProspectChange = (event) => {
@@ -120,46 +119,59 @@ class ProspectForm extends React.Component {
     }
 
     render() {
-        let {adresseProspect, nomProspect, prenomsProspect, telephonePropect1, telephonePropect2, enfants} = this.state;
+        let {adresseProspect, nomProspect, quartier, lieudit, prenomsProspect, telephonePropect1, telephonePropect2, commune, enfants} = this.state;
         return (
 
             <form onSubmit={this.handleSubmit} onKeyPress={this.preventEnterKey}>
+                <Grid container>
+                    <Grid item md={4} xs={12}>
+                        <TextField fullWidth={true} label="Nom " value={nomProspect}
+                                   onChange={this.handleNomProspectChange}/>
 
-                <TextField label="Nom " value={this.state.nomProspect} floatingLabelText="Nom"
-                           onChange={this.handleNomProspectChange}/>
-
-                <TextField label="Prénoms" value={prenomsProspect} floatingLabelText="Prénoms"
-                           onChange={this.handlePrenomsProspectChange}/><br />
-                <TextField label="Téléphone #1" value={telephonePropect1}
-                           onChange={this.handleTelephonePropect1Change}/>
-                <TextField  label="Téléphone #2" value={telephonePropect2}
-                           onChange={this.handleTelephonePropect2Change}/><br />
-
-                <br />
-
-
-                <TextField value={adresseProspect}
-                           onChange={this.handleAdresseChange}
-                           label="Adresse"
-                           multiLine={true}
-                           rows={3}/>
-                <br />
-                <Divider />
+                        <TextField fullWidth={true} label="Prénoms" value={prenomsProspect}
+                                   onChange={this.handlePrenomsProspectChange}/><br />
+                        <TextField fullWidth={true} label="Téléphone #1" value={telephonePropect1}
+                                   onChange={this.handleTelephonePropect1Change}/>
+                        <TextField fullWidth={true} label="Téléphone #2" value={telephonePropect2}
+                                   onChange={this.handleTelephonePropect2Change}/><br />
 
 
-                {enfants && enfants.length > 0 &&
-                <InfoEleveForm data={enfants[enfants.length - 1]} onClasseChange={this.onClasseChange}
-                               onEtablissementChange={this.onEtablissementChange}/> }
+                    </Grid>
 
-                <Button onClick={this.handleSubmit} variant="raised" color="secondary" style={style.addButton}>
-                    Valider
-                </Button>
-                <Button onClick={this.ajouterEnfant} variant="fab" arial-label="add" color="primary"
-                        style={style.addButton}>
-                    <AddIcon/>
-                </Button>
-                <br />
+                    <Grid item md={4} xs={12}>
 
+
+                        <TextField fullWidth={true} label="Commune " value={commune}
+                                   onChange={this.handleNomProspectChange}/>
+
+                        <TextField fullWidth={true} label="Quartier" value={quartier}
+                                   onChange={this.handlePrenomsProspectChange}/><br />
+                        <TextField fullWidth={true} label="Cité ou Lieu-dit" value={lieudit}
+                                   onChange={this.handleTelephonePropect1Change}/>
+                        <TextField value={adresseProspect}
+                                   onChange={this.handleAdresseChange}
+                                   label="Complément Adresse"
+                                   rows={3}/>
+                    </Grid>
+
+                    <Grid item xs={12}>
+
+                        {enfants && enfants.length > 0 &&
+                        <InfoEleveForm data={enfants[enfants.length - 1]}
+                                       onClasseChange={this.onClasseChange}
+                                       onEtablissementChange={this.onEtablissementChange}/> }
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Button onClick={this.handleSubmit} variant="raised" color="secondary" style={style.addButton}>
+                            Valider
+                        </Button>
+                        <Button onClick={this.ajouterEnfant} variant="fab" color="primary"
+                                style={style.addButton}>
+                            <AddIcon/>
+                        </Button>
+                    </Grid>
+
+                </Grid>
             </form>
         );
     }
