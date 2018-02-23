@@ -3,9 +3,10 @@
  */
 
 import React from "react";
-import {Tabs, Tab} from "material-ui/Tabs";
+import Tabs, {Tab} from "material-ui/Tabs";
 import Button from "material-ui/Button";
 import ProspectForm from "../../client/ProspectForm";
+import TabContainer from "../../components/TabContainer"
 const styles = {
     headline: {
         fontSize: 24,
@@ -18,48 +19,60 @@ const styles = {
     }
 };
 
-const Accueil = () => {
 
-    return (
-    <Tabs>
-        <Tab label="Prospects">
-            <div>
-                <h2 style={styles.headline}>Les prospects</h2>
+class Accueil extends React.Component {
+    state = {
+        value: 0,
+    };
+    handleChange = (event, value) => {
+        this.setState({value});
+    };
 
-                <Button variant="raised" color="secondary" style={styles.addButton} >
-                    Nouveau
-                </Button>
-                <ProspectForm />
+    render() {
+        const {value} = this.state;
+        return (
+            <div >
+                <Tabs value={value} onChange={this.handleChange}>
+                    <Tab label="Prospects">
+                        <div>
+                            <h2 style={styles.headline}>Les prospects</h2>
+
+
+                        </div>
+                    </Tab>
+
+                    <Tab label="Clients">
+                        <div>
+                            <h2 style={styles.headline}>Les clients</h2>
+
+                            <Button variant="raised" color="secondary" style={styles.addButton}>
+                                Nouveau
+                            </Button>
+                        </div>
+                    </Tab>
+
+                    <Tab label="Enseignants"
+                         data-route="/home">
+                        <div>
+                            <h2 style={styles.headline}>Les enseignants</h2>
+
+                            <Button variant="raised" color="secondary" style={styles.addButton}>
+                                Nouveau
+                            </Button>
+                        </div>
+                    </Tab>
+                </Tabs>
+                {value === 0 && <TabContainer>
+
+                    <ProspectForm />
+                </TabContainer>}
+                {value === 1 && <TabContainer>Item Two</TabContainer>}
+                {value === 2 && <TabContainer>Item Three</TabContainer>}
             </div>
-        </Tab>
-
-        <Tab label="Clients">
-            <div>
-                <h2 style={styles.headline}>Les clients</h2>
-
-                <Button variant="raised" color="secondary" style={styles.addButton} >
-                    Nouveau
-                </Button>
-            </div>
-        </Tab>
-
-        <Tab label="Enseignants"
-             data-route="/home"
-             onActive={handleActive}>
-            <div>
-                <h2 style={styles.headline}>Les enseignants</h2>
-
-                <Button variant="raised" color="secondary" style={styles.addButton} >
-                    Nouveau
-                </Button>
-            </div>
-        </Tab>
-    </Tabs>
-    );
-};
-
-function handleActive(tab) {
-    alert(`A tab with this route property ${tab.props['data-route']} was activated.`);
+        );
+    }
 }
+;
+
 
 export default Accueil;

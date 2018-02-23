@@ -6,17 +6,22 @@
 import React from "react";
 import TextField from "material-ui/TextField";
 import Button from "material-ui/Button";
-import ContentAdd from "material-ui/svg-icons/content/add";
+import ContentAdd from "material-ui-icons/Add";
 import FloatingActionButton from "../components/FloatingActionButton";
 import {clients} from "../lib/firebase";
 import InfoEleveForm from "../components/InfoEleveForm";
-
-
+import AddIcon from 'material-ui-icons/Add';
 const style = {
-
-    margin: 12,
-}
-
+    headline: {
+        fontSize: 24,
+        paddingTop: 16,
+        marginBottom: 12,
+        fontWeight: 400,
+    },
+    addButton: {
+        margin: 12,
+    }
+};
 
 class ProspectForm extends React.Component {
 
@@ -32,6 +37,7 @@ class ProspectForm extends React.Component {
         }
 
         this.ajouterEnfant = this.ajouterEnfant.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.handleNomProspectChange = this.handleNomProspectChange.bind(this);
         this.handlePrenomsProspectChange = this.handlePrenomsProspectChange.bind(this);
         this.handleTelephonePropect2Change = this.handleTelephonePropect2Change.bind(this);
@@ -79,18 +85,15 @@ class ProspectForm extends React.Component {
 
 
     handleSubmit() {
-
-        let nom = this.nomInput.value;
-        let prenom = this.prenomInput.value;
-        let adresse = this.adresseInput.value;
-        let telephone1 = this.telephone1Input.value;
-        let telephone2 = this.telephone2Input.value;
+        console.log("le state");
+        console.table(this.state)
+        let {adresseProspect, nomProspect, prenomsProspect, telephonePropect1, telephonePropect2, enfants} = this.state;
         clients.push({
-            'nom': nom,
-            'prenom': prenom,
-            'adresse': adresse,
-            'telephone1': telephone1,
-            'telephone2': telephone2,
+            'nom': nomProspect,
+            'prenom': prenomsProspect,
+            'adresse': adresseProspect,
+            'telephone1': telephonePropect1,
+            'telephone2': telephonePropect2,
         })
     }
 
@@ -121,35 +124,38 @@ class ProspectForm extends React.Component {
 
             <form onSubmit={this.handleSubmit} onKeyPress={this.preventEnterKey}>
 
-                <TextField value={this.state.nomProspect} floatingLabelText="Nom"
+                <TextField label="Nom " value={this.state.nomProspect} floatingLabelText="Nom"
                            onChange={this.handleNomProspectChange}/>
 
-                <TextField value={prenomsProspect} floatingLabelText="Prénoms"
+                <TextField label="Prénoms" value={prenomsProspect} floatingLabelText="Prénoms"
                            onChange={this.handlePrenomsProspectChange}/><br />
-                <TextField value={telephonePropect1} floatingLabelText="Téléphone #1"
+                <TextField label="Téléphone #1" value={telephonePropect1}
                            onChange={this.handleTelephonePropect1Change}/>
-                <TextField value={telephonePropect2} floatingLabelText="Téléphone #2"
+                <TextField label="Téléphone #2" value={telephonePropect2}
                            onChange={this.handleTelephonePropect2Change}/><br />
 
                 <br />
 
 
-                <TextField value={adresseProspect} onChange={this.handleAdresseChange}
-
-                           floatingLabelText="Veuillez renseigner l'adresse"
+                <TextField value={adresseProspect}
+                           onChange={this.handleAdresseChange}
+                           label="Adresse"
                            multiLine={true}
-                           rows={3}
-                />
+                           rows={3}/>
                 <br />
 
-                <FloatingActionButton onClick={this.ajouterEnfant} style={style}>
-                    <ContentAdd  />
-                </FloatingActionButton>
+
                 {enfants && enfants.length > 0 &&
                 <InfoEleveForm data={enfants[enfants.length - 1]} onClasseChange={this.onClasseChange}
                                onEtablissementChange={this.onEtablissementChange}/> }
 
-                <Button type="submit" data-e2b-id="validate-case-form">Valider</Button>
+                <Button onClick={this.handleSubmit} variant="raised" color="secondary" style={style.addButton}>
+                    Valider
+                </Button>
+                <Button onClick={this.ajouterEnfant} variant="fab" arial-label="add" color="primary"
+                        style={style.addButton}>
+                    <AddIcon/>
+                </Button>
                 <br />
 
             </form>

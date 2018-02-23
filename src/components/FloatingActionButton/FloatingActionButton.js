@@ -24,12 +24,7 @@ function FloatingActionButtons(props) {
             <Button variant="fab" color="primary" aria-label="add" className={classes.button}>
                 <AddIcon />
             </Button>
-            <Button variant="fab" color="secondary" aria-label="edit" className={classes.button}>
-                <Icon>edit_icon</Icon>
-            </Button>
-            <Button variant="fab" disabled aria-label="delete" className={classes.button}>
-                <DeleteIcon />
-            </Button>
+
         </div>
     );
 }
