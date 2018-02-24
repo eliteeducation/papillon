@@ -5,7 +5,7 @@
 import React from "react";
 import Tabs, {Tab} from "material-ui/Tabs";
 import Button from "material-ui/Button";
-import ProspectForm from "../../client/ProspectForm";
+import ProspectForm from "../../components/Form/ProspectForm/ProspectForm";
 import TabContainer from "../../components/TabContainer"
 const styles = {
     headline: {

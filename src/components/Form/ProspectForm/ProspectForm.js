@@ -6,9 +6,10 @@
 import React from "react";
 import TextField from "material-ui/TextField";
 import Button from "material-ui/Button";
-import {clients} from "../lib/firebase";
-import InfoEleveForm from "../components/InfoEleveForm";
+import {clients} from "../../../lib/firebase";
+import InfoEleveForm from "./InfoEleveForm";
 import Grid from "material-ui/Grid";
+
 const style = {
     headline: {
         fontSize: 24,
@@ -42,6 +43,7 @@ class ProspectForm extends React.Component {
         this.handleTelephonePropect1Change = this.handleTelephonePropect1Change.bind(this);
         this.handleAdresseChange = this.handleAdresseChange.bind(this);
         this.onClasseChange = this.onClasseChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.onEtablissementChange = this.onEtablissementChange.bind(this);
     }
 
@@ -52,7 +54,12 @@ class ProspectForm extends React.Component {
         console.log("taille tableau : ", this.state.enfants.length);
         console.log("Les enfants: ", this.state.enfants);
     }
-
+    handleChange = name => event => {
+        console.log("val : ", event.target.value)
+        this.setState({
+            [name]: event.target.value,
+        });
+    };
     handleNomProspectChange = (event) => {
         this.setState({
             nomProspect: event.target.value,
@@ -124,21 +131,21 @@ class ProspectForm extends React.Component {
 
     render() {
         let {adresseProspect, nomProspect, quartier, lieudit, prenomsProspect, telephonePropect1, telephonePropect2, commune, enfants} = this.state;
-        console.log("les enfants : ", enfants);
+
         return (
 
             <form onSubmit={this.handleSubmit} onKeyPress={this.preventEnterKey}>
                 <Grid container>
                     <Grid item md={4} xs={12}>
                         <TextField fullWidth={true} label="Nom " value={nomProspect}
-                                   onChange={this.handleNomProspectChange}/>
+                                   onChange={this.handleChange('nomProspect')}/>
 
                         <TextField fullWidth={true} label="Prénoms" value={prenomsProspect}
-                                   onChange={this.handlePrenomsProspectChange}/><br />
+                                   onChange={this.handleChange('prenomsProspect')}/><br />
                         <TextField fullWidth={true} label="Téléphone #1" value={telephonePropect1}
-                                   onChange={this.handleTelephonePropect1Change}/>
+                                   onChange={this.handleChange('telephonePropect1')}/>
                         <TextField fullWidth={true} label="Téléphone #2" value={telephonePropect2}
-                                   onChange={this.handleTelephonePropect2Change}/><br />
+                                   onChange={this.handleChange('telephonePropect2')}/><br />
 
 
                     </Grid>
@@ -147,14 +154,14 @@ class ProspectForm extends React.Component {
 
 
                         <TextField fullWidth={true} label="Commune " value={commune}
-                                   onChange={this.handleNomProspectChange}/>
+                                   onChange={this.handleChange('commune')}/>
 
                         <TextField fullWidth={true} label="Quartier" value={quartier}
-                                   onChange={this.handlePrenomsProspectChange}/><br />
+                                   onChange={this.handleChange('quartier')}/><br />
                         <TextField fullWidth={true} label="Cité ou Lieu-dit" value={lieudit}
-                                   onChange={this.handleTelephonePropect1Change}/>
+                                   onChange={this.handleChange('lieudit')}/>
                         <TextField value={adresseProspect}
-                                   onChange={this.handleAdresseChange}
+                                   onChange={this.handleChange('adresseProspect')}
                                    label="Complément Adresse"
                                    rows={3}/>
                     </Grid>

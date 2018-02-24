@@ -4,6 +4,37 @@
 
 
 
+export const TARIFS_SECONDAIRE_PROGRAMME_IVOIRIEN = {
+    'TERMINALE': 88000,
+    'PREMIERE': 88000,
+    'SECONDE': 75000,
+    'TROISIEME': 65000,
+    'QUATRIEME': 55000,
+    'CINQUIEME': 52000,
+    'SIXIEME': 52000,
+}
+
+
+export const TARIFS_SECONDAIRE_PROGRAMME_FRANCAIS = {
+    'TERMINALE': 105600,
+    'PREMIERE': 105600,
+    'SECONDE': 90000,
+    'TROISIEME': 78000,
+    'QUATRIEME': 66000,
+    'CINQUIEME': 64200,
+    'SIXIEME': 64200,
+}
+
+
+export const TARIFS_PRIMAIRE_PROGRAMME_FRANCAIS = {
+    'TERMINALE': 88000,
+    'PREMIERE': 88000,
+    'SECONDE': 75000,
+    'TROISIEME': 65000,
+    'QUATRIEME': 55000,
+    'CINQUIEME': 52000,
+    'SIXIEME': 52000,
+}
 
 export const Classes = [
     {nom: 'CM1'},
@@ -17,53 +48,65 @@ export const Classes = [
     {nom: 'TERMINALE'}
 ]
 
+export const TypeMatiere = {
+    TECHNIQUE: 'TECHNIQUE',
+    SCIENTIFIQUE: 'SCIENTIFIQUE',
+    LITTERAIRE: 'LITTERAIRE'
+}
 
 export const MatieresSeconcaire = [
     {
         value: 'Mathématique',
-        code: 'math'
+        code: 'math',
+       type:TypeMatiere.SCIENTIFIQUE
+
     },
     {
         value: 'Physique',
-        code: 'phys'
+        code: 'phys',
+        type:TypeMatiere.SCIENTIFIQUE
     },
     {
         value: 'Histoire Géo',
-        code: 'histg'
+        code: 'histg',
+        type:TypeMatiere.LITTERAIRE
     },
     {
         value: 'Anglais',
-        code: 'angl'
+        code: 'angl',
+        type:TypeMatiere.LITTERAIRE
     },
     {
         value: 'Français',
-        code: 'fran'
+        code: 'fran',
+        type:TypeMatiere.LITTERAIRE
     },
     {
         value: 'Phylosophie',
-        code: 'phylo'
+        code: 'phylo',
+        type:TypeMatiere.LITTERAIRE
     },
     {
         value: 'SVT',
-        code: 'svt'
+        code: 'svt',
+        type:TypeMatiere.SCIENTIFIQUE
     },
     {
         value: 'Comptabilité',
-        code: 'compt'
+        code: 'compt',
+        type:TypeMatiere.TECHNIQUE
     },
     {
         value: 'Espagnol',
-        code: 'espa'
+        code: 'espa',
+        type:TypeMatiere.LITTERAIRE
     }
 ]
 
 
-export const TypeEnseignement = {
-    TECHNIQUE: 'CM1',
-    GENERAL: 'CM2'
-}
 
 export const Programme = {
     FRANCAINS: 'FRANCAIS',
-    IVOIRIE: 'CM2'
+    IVOIRIEN: 'IVOIRIEN',
+    AMERICAIN: 'AMERICAIN'
 }
