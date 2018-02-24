@@ -9,7 +9,6 @@ import {withStyles} from "material-ui/styles";
 import Input, {InputLabel} from "material-ui/Input";
 import {MenuItem} from "material-ui/Menu";
 import {FormControl} from "material-ui/Form";
-import {ListItemText} from "material-ui/List";
 import Select from "material-ui/Select";
 
 const styles = theme => ({
@@ -42,51 +41,37 @@ const MenuProps = {
     },
 };
 
-const names = [
-    'Oliver Hansen',
-    'Van Henry',
-    'April Tucker',
-    'Ralph Hubbard',
-    'Omar Alexander',
-    'Carlos Abbott',
-    'Miriam Wagner',
-    'Bradley Wilkerson',
-    'Virginia Andrews',
-    'Kelly Snyder',
-];
 
 class MatiereList extends React.Component {
     state = {
-        name: [],
+        values: [],
     };
 
-    handleChange = event => {
-        this.setState({name: event.target.value});
-    };
+
 
     render() {
-        const {classes, theme} = this.props;
+        const {classes, theme, selectedItems, data, handleChange} = this.props;
 
         return (
             <div className={classes.root}>
-                <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="select-multiple">Name</InputLabel>
+                <FormControl fullWidth={true} className={classes.formControl}>
+                    <InputLabel htmlFor="select-multiple">Choisissez une matière:</InputLabel>
                     <Select
                         multiple
-                        value={this.state.name}
-                        onChange={this.handleChange}
+                        value={selectedItems}
+                        onChange={handleChange}
                         input={<Input id="select-multiple"/>}
                         MenuProps={MenuProps}>
-                        {names.map(name => (
+                        {data.map(d => (
                             <MenuItem
-                                key={name}
-                                value={name}
+                                key={d}
+                                value={d}
                                 style={{
-                                    fontWeight: this.state.name.indexOf(name) === -1
+                                    fontWeight: selectedItems.length == 0 || selectedItems.indexOf(d) === -1
                                         ? theme.typography.fontWeightRegular
                                         : theme.typography.fontWeightMedium,
                                 }}>
-                                {name}
+                                {d}
                             </MenuItem>
                         ))}
                     </Select>
@@ -101,6 +86,9 @@ class MatiereList extends React.Component {
 MatiereList.propTypes = {
     classes: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
+    data: PropTypes.array.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    selectedItems: PropTypes.array.isRequired,
 };
 
 export default withStyles(styles, {withTheme: true})(MatiereList);

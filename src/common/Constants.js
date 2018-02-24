@@ -2,17 +2,8 @@
  * Created by emma on 18/08/17.
  */
 
-import React from 'react';
 
-const CM1 = Symbol();
-const CM2 = Symbol();
-const SIXIEME = Symbol();
-const CINQUIEME = Symbol();
-const QUATRIEME = Symbol();
-const TROISIEME = Symbol();
-const SECONDE = Symbol();
-const PREMIERE = Symbol();
-const TERMINALE = Symbol();
+
 
 export const Classes = [
     {nom: 'CM1'},
@@ -27,17 +18,17 @@ export const Classes = [
 ]
 
 
-export const MatieresSeconcaire = {
-    MAth: 'CM1',
-    CM2: 'CM2',
-    SIXIEME: 'SIXIEME',
-    CINQUIEME: 'CINQUIEME',
-    QUATRIEME: 'QUATRIEME',
-    TROISIEME: 'TROISIEME',
-    SECONDE: 'SECONDE',
-    PREMIERE: 'PREMIERE',
-    TERMINALE: 'TERMINALE'
-}
+export const MatieresSeconcaire = [
+    {value: 'Mathématique'},
+    {value: 'Physique'},
+    {value: 'Histoire Géo'},
+    {value: 'Anglais'},
+    {value: 'Français'},
+    {value: 'Phylosophie'},
+    {value: 'SECONDE'},
+    {value: 'PREMIERE'},
+    {value: 'TERMINALE'}
+]
 
 
 export const TypeEnseignement = {

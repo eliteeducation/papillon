@@ -162,12 +162,11 @@ class ProspectForm extends React.Component {
                                        onEtablissementChange={this.onEtablissementChange}/> }
                     </Grid>
                     <Grid item xs={12}>
-                        <Button onClick={this.handleSubmit} variant="raised" color="secondary" style={style.addButton}>
+                        <Button onClick={this.handleSubmit} variant="raised" color="primary" style={style.addButton}>
                             Valider
                         </Button>
-                        <Button onClick={this.ajouterEnfant} variant="fab" color="primary"
-                                style={style.addButton}>
-                            <AddIcon/>
+                        <Button onClick={this.ajouterEnfant} variant="raised" color="primary" style={style.addButton}>
+                            Ajouter Enfant
                         </Button>
                     </Grid>
 
