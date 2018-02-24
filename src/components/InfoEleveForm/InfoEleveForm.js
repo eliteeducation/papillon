@@ -51,12 +51,12 @@ class InfoEleveForm extends React.Component {
             age: '',
             etablissement: '',
             classe: '',
-            matieres: []
+            matieresSelectionnees: []
         }
         this.onTextFieldChange = this.onTextFieldChange.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleMatiereChange = this.handleMatiereChange.bind(this);
-        this.onChangeEnseignantMatiere = this.onChangeEnseignantMatiere.bind(this);
+        this.onSetEnseignantMatiere = this.onSetEnseignantMatiere.bind(this);
     }
 
 
@@ -73,34 +73,36 @@ class InfoEleveForm extends React.Component {
             [name]: event.target.value,
         });
     };
-    onChangeEnseignantMatiere = (enseignant, matiere) => event => {
-        console.log("onChangeEnseignantMatiere : ", event.target.value)
-        this.setState({
-            [enseignant]: {
-                [matiere]: event.target.value
+    onSetEnseignantMatiere = (nomEnseignant, matiere) => event => {
+
+        let val = event.target.value;
+
+        this.setState((prevState, props) =>{
+            return {
+                [nomEnseignant]: Object.assign({}, prevState[nomEnseignant], {[matiere]: val})
             }
+
         });
     };
     handleMatiereChange = event => {
 
         this.setState((prevState, props) => {
-          /*  let newVal = event.target.value;
-            let oldVals = prevState.matieres;
-            console.log("ancienne val : ",oldVals)
-            console.log("nouvelle val : ", newVal)*/
+
             return {
-                matieres: event.target.value
+                matieresSelectionnees: event.target.value
             };
         })
     };
 
     render() {
-        let {classes, level} = this.props
-        let {etablissement, programme, nomEnseignantEE, nomEnseignantEcole, nomFamille, prenoms, matieres} = this.state;
-        console.log("matiéères sélectionnées : ", matieres)
+        let {classes, level, data} = this.props
+        let {etablissement, programme, nomEnseignantEE, nomEnseignantEcole, nomFamille, prenoms, matieresSelectionnees} = this.state;
+        data.enfant=this.state;
+        console.log("le state: ", this.state)
+        console.log("le data: ", data)
         return (
 
-            <ExpansionPanel>
+            <ExpansionPanel >
                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                     <Typography className={classes.heading}>{nomFamille} , {prenoms}</Typography>
                 </ExpansionPanelSummary>
@@ -149,8 +151,7 @@ class InfoEleveForm extends React.Component {
                                     </TextField>
                                     <TextField label="Etablissement" value={etablissement}
                                                onChange={this.onTextFieldChange('etablissement')}/>
-                                    {/* <TextField label="Nom de l'enseignant" value={nomEnseignant}
-                                     onChange={this.onTextFieldChange('nomEnseignant')}/>*/}
+
 
                                 </FormControl>
                             </Grid>
@@ -161,22 +162,24 @@ class InfoEleveForm extends React.Component {
                             <Grid container={true}>
 
                                 <Grid item xs={12}>
-                                    <MatiereList selectedItems={matieres} data={ MatieresSeconcaire.map(m=>m.value)}
+                                    <MatiereList selectedItems={matieresSelectionnees} data={ MatieresSeconcaire.map(m=>m.value)}
                                                  handleChange={this.handleMatiereChange}/>
                                 </Grid>
                                 <Grid item xs={12}>
-                                    {matieres.length > 0 &&
+                                    {matieresSelectionnees.length > 0 &&
 
-                                    matieres.map(mat=> {
+                                    matieresSelectionnees.map(matiere=> {
+                                      const codeMatiere =   MatieresSeconcaire.find(m=>m.value===matiere).code;
+                                        console.log("current code : ",codeMatiere)
                                         return (
-                                            <div key={mat}>
-                                                <label>{mat}</label>
-                                                <TextField label="Enseignant école"
-                                                           value={nomEnseignantEcole ? nomEnseignantEcole[{mat}] : ''}
-                                                           onChange={this.onChangeEnseignantMatiere('nomEnseignantEcole', {mat})}/>
+                                            <div key={matiere}>
+                                                <label>{matiere}</label>
+                                                <TextField label="Enseignant Ecole"
+                                                           value={nomEnseignantEcole ? nomEnseignantEcole[codeMatiere] : ''}
+                                                           onChange={this.onSetEnseignantMatiere('nomEnseignantEcole', codeMatiere)}/>
                                                 <TextField label="Enseignant E.E."
-                                                           value={nomEnseignantEE ? nomEnseignantEE[{mat}] : ''}
-                                                           onChange={this.onChangeEnseignantMatiere('nomEnseignantEE', {mat})}/>
+                                                           value={nomEnseignantEE ? nomEnseignantEE[codeMatiere] : ''}
+                                                           onChange={this.onSetEnseignantMatiere('nomEnseignantEE', codeMatiere)}/>
                                             </div>)
                                     })
                                     }

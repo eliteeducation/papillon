@@ -19,15 +19,42 @@ export const Classes = [
 
 
 export const MatieresSeconcaire = [
-    {value: 'Mathématique'},
-    {value: 'Physique'},
-    {value: 'Histoire Géo'},
-    {value: 'Anglais'},
-    {value: 'Français'},
-    {value: 'Phylosophie'},
-    {value: 'SECONDE'},
-    {value: 'PREMIERE'},
-    {value: 'TERMINALE'}
+    {
+        value: 'Mathématique',
+        code: 'math'
+    },
+    {
+        value: 'Physique',
+        code: 'phys'
+    },
+    {
+        value: 'Histoire Géo',
+        code: 'histg'
+    },
+    {
+        value: 'Anglais',
+        code: 'angl'
+    },
+    {
+        value: 'Français',
+        code: 'fran'
+    },
+    {
+        value: 'Phylosophie',
+        code: 'phylo'
+    },
+    {
+        value: 'SVT',
+        code: 'svt'
+    },
+    {
+        value: 'Comptabilité',
+        code: 'compt'
+    },
+    {
+        value: 'Espagnol',
+        code: 'espa'
+    }
 ]
 
 

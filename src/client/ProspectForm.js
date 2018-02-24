@@ -6,7 +6,6 @@
 import React from "react";
 import TextField from "material-ui/TextField";
 import Button from "material-ui/Button";
-import AddIcon from "material-ui-icons/Add";
 import {clients} from "../lib/firebase";
 import InfoEleveForm from "../components/InfoEleveForm";
 import Grid from "material-ui/Grid";
@@ -87,13 +86,18 @@ class ProspectForm extends React.Component {
     handleSubmit() {
         console.log("le state");
         console.table(this.state)
-        let {adresseProspect, nomProspect, prenomsProspect, telephonePropect1, telephonePropect2, enfants} = this.state;
+        let {adresseProspect, nomProspect, quartier, lieudit, prenomsProspect, telephonePropect1, telephonePropect2, commune, enfants} = this.state;
+        console.log("ProspectForm - pushons : ",this.state);
         clients.push({
-            'nom': nomProspect,
-            'prenom': prenomsProspect,
-            'adresse': adresseProspect,
-            'telephone1': telephonePropect1,
-            'telephone2': telephonePropect2,
+            'nom': nomProspect ? nomProspect:'',
+            'prenom':prenomsProspect ?  prenomsProspect:prenomsProspect,
+            'quartier': quartier?  prenomsProspect:prenomsProspect,
+            'lieudit': lieudit?  prenomsProspect:prenomsProspect,
+            'commune': commune?  prenomsProspect:prenomsProspect,
+            'adresse': adresseProspect?  prenomsProspect:prenomsProspect,
+            'telephone1': telephonePropect1?  prenomsProspect:prenomsProspect,
+            'telephone2': telephonePropect2?  prenomsProspect:prenomsProspect,
+            'enfants':enfants ?enfants : []
         })
     }
 
@@ -120,6 +124,7 @@ class ProspectForm extends React.Component {
 
     render() {
         let {adresseProspect, nomProspect, quartier, lieudit, prenomsProspect, telephonePropect1, telephonePropect2, commune, enfants} = this.state;
+        console.log("les enfants : ", enfants);
         return (
 
             <form onSubmit={this.handleSubmit} onKeyPress={this.preventEnterKey}>
