@@ -50,7 +50,7 @@ class MatiereList extends React.Component {
 
 
     render() {
-        const {classes, theme, selectedItems, data, handleChange} = this.props;
+        const {classes, theme, selectedItems, matieres, handleChange} = this.props;
 
         return (
             <div className={classes.root}>
@@ -62,16 +62,16 @@ class MatiereList extends React.Component {
                         onChange={handleChange}
                         input={<Input id="select-multiple"/>}
                         MenuProps={MenuProps}>
-                        {data.map(d => (
+                        {matieres.map(matiere => (
                             <MenuItem
-                                key={d}
-                                value={d}
+                                key={matiere}
+                                value={matiere}
                                 style={{
-                                    fontWeight: selectedItems.length == 0 || selectedItems.indexOf(d) === -1
+                                    fontWeight: selectedItems.length == 0 || selectedItems.indexOf(matiere) === -1
                                         ? theme.typography.fontWeightRegular
                                         : theme.typography.fontWeightMedium,
                                 }}>
-                                {d}
+                                {matiere}
                             </MenuItem>
                         ))}
                     </Select>
@@ -86,7 +86,7 @@ class MatiereList extends React.Component {
 MatiereList.propTypes = {
     classes: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
-    data: PropTypes.array.isRequired,
+    matieres: PropTypes.array.isRequired,
     handleChange: PropTypes.func.isRequired,
     selectedItems: PropTypes.array.isRequired,
 };

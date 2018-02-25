@@ -3,7 +3,7 @@ import TextField from "material-ui/TextField";
 import {FormControl, FormControlLabel, FormLabel, FormGroup} from "material-ui/Form";
 import Radio, {RadioGroup} from "material-ui/Radio";
 import MatiereList from "../../MatiereList";
-import {Classes, MatieresSeconcaire, Programme, TARIFS_SECONDAIRE_PROGRAMME_IVOIRIEN} from "../../../../common/Constants";
+import {Classes, MatieresSeconcaire, Programme, TARIFS_SECONDAIRE_PROGRAMME_IVOIRIEN} from "Constants";
 import Grid from "material-ui/Grid";
 import ExpansionPanel, {ExpansionPanelSummary, ExpansionPanelDetails} from "material-ui/ExpansionPanel";
 import Typography from "material-ui/Typography";
@@ -11,6 +11,7 @@ import PropTypes from "prop-types";
 import Checkbox from 'material-ui/Checkbox';
 import ExpandMoreIcon from "material-ui-icons/ExpandMore";
 import { withStyles } from 'material-ui/styles';
+import PriceTable from './PriceTable';
 
 const styles = theme => ({
     root: {
@@ -78,11 +79,11 @@ class InfoEleveForm extends React.Component {
             matieresSelectionnees: [],
             prixParMatiere : undefined
         }
-        this.onTextFieldChange = this.onTextFieldChange.bind(this);
+       /* this.onTextFieldChange = this.onTextFieldChange.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleCreateModuleChange = this.handleCreateModuleChange.bind(this);
         this.handleMatiereChange = this.handleMatiereChange.bind(this);
-        this.onSetEnseignantMatiere = this.onSetEnseignantMatiere.bind(this);
+        this.onSetEnseignantMatiere = this.onSetEnseignantMatiere.bind(this);*/
     }
 
 
@@ -129,12 +130,9 @@ class InfoEleveForm extends React.Component {
         let {programme, classe} = this.state;
         matieresSelectionnees: event.target.value;
        let prix =  calculPrixMatiere(classe,programme);
-
-        this.setState((prevState, props) => {
-            return {
+        this.setState({
                 matieresSelectionnees: event.target.value,
                 prixParMatiere : prix
-            };
         })
     };
 
@@ -156,7 +154,7 @@ class InfoEleveForm extends React.Component {
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <Grid container>
-                        <Grid item md={3} xs={12}>
+                        <Grid item md={4} xs={12}>
                             <Grid item xs={12}>
                                 <FormControl component="fieldset">
 
@@ -204,12 +202,12 @@ class InfoEleveForm extends React.Component {
                         </Grid>
 
 
-                        <Grid item md={6} xs={12}>
+                        <Grid item md={5} xs={12}>
                             <Grid container={true}>
 
                                 <Grid item xs={12}>
                                     <MatiereList selectedItems={matieresSelectionnees}
-                                                 data={ MatieresSeconcaire.map(m=>m.value)}
+                                                 matieres={ MatieresSeconcaire.map(matiere=>matiere.value)}
                                                  handleChange={this.handleMatiereChange}/>
                                 </Grid>
                                 <Grid item xs={12}>
@@ -217,34 +215,34 @@ class InfoEleveForm extends React.Component {
 
                                     matieresSelectionnees.map(matiere=> {
                                         let objMatiere =  MatieresSeconcaire.find(m=>m.value === matiere);
-                                        const codeMatiere =objMatiere.code;
+                                       const codeMatiere =objMatiere.code;
                                         return (
                                             <div key={matiere}>
+                                                <PriceTable matieresSelectionnees={matieresSelectionnees}/>
+                                                {/*   <FormControl component="fieldset">
+                                                    <FormLabel component="legend"> Les enseignants pour {matiere}</FormLabel>
 
-                                                <FormControl component="fieldset">
-                                                    <FormLabel component="legend"> Les enseignants
-                                                        pour {matiere}</FormLabel>
-                                                    <FormGroup row>
+                                                     <FormGroup row>
                                                         <TextField label="Enseignant Ecole"
-                                                                   value={nomEnseignantEcole ? nomEnseignantEcole[codeMatiere] : ''}
-                                                                   onChange={this.onSetEnseignantMatiere('nomEnseignantEcole', codeMatiere)}/>
+                                                                   value={nomEnseignantEcole ? nomEnseignantEcole[objMatiere.code] : ''}
+                                                                   onChange={this.onSetEnseignantMatiere('nomEnseignantEcole',objMatiere.code)}/>
                                                         <TextField label="Enseignant E.E."
-                                                                   value={nomEnseignantEE ? nomEnseignantEE[codeMatiere] : ''}
-                                                                   onChange={this.onSetEnseignantMatiere('nomEnseignantEE', codeMatiere)}/>
+                                                                   value={nomEnseignantEE ? nomEnseignantEE[objMatiere.code] : ''}
+                                                                   onChange={this.onSetEnseignantMatiere('nomEnseignantEE', objMatiere.code)}/>
 
-                                                        {matieresSelectionnees.length >=2 &&
+                                                       {matieresSelectionnees.length >=2 &&
                                                         <FormControlLabel
                                                             control={
                                                                 <Checkbox
-                                                                    checked={this.state[`${codeMatiere}-module-${objMatiere.type}`]}
-                                                                    onChange={this.handleCreateModuleChange(`${codeMatiere}-module-${objMatiere.type}`)}
-                                                                    value={`${codeMatiere}-module-${objMatiere.type}`}
+                                                                    checked={this.state[`${objMatiere.code}-module-${objMatiere.code}`]}
+                                                                    onChange={this.handleCreateModuleChange(`${objMatiere.code}-module-${objMatiere.code}`)}
+                                                                    value={`${objMatiere.code}-module-${objMatiere.code}`}
                                                                 />
                                                             }
                                                             label={`Module ${objMatiere.type}?`}
                                                         />}
                                                     </FormGroup>
-                                                </FormControl>
+                                                </FormControl>*/}
                                                 <br />
 
                                             </div>)
@@ -256,21 +254,8 @@ class InfoEleveForm extends React.Component {
                         </Grid>
 
                         <Grid item md={3} xs={12}>
-                            <FormControl component="fieldset">
 
-                                <FormLabel component="legend">Programme</FormLabel>
-                                <RadioGroup row name="programme" value={programme}>
-                                    <FormControlLabel value="Ivoirien"
-                                                      control={<Radio onChange={this.handleChange('programme')}/>}
-                                                      label="Ivoirien"/>
-                                    <FormControlLabel value="Francais"
-                                                      control={<Radio onChange={this.handleChange('programme')}/>}
-                                                      label="Francais"/>
-                                    <FormControlLabel value="Americain"
-                                                      control={<Radio onChange={this.handleChange('programme')}/>}
-                                                      label="Americain"/>
-                                </RadioGroup>
-                            </FormControl>
+
                         </Grid>
 
                     </Grid>
