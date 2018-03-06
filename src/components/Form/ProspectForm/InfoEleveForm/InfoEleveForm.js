@@ -1,6 +1,6 @@
 import React from "react";
 import TextField from "material-ui/TextField";
-import {FormControl, FormControlLabel, FormLabel, FormGroup} from "material-ui/Form";
+import {FormControl, FormControlLabel, FormLabel} from "material-ui/Form";
 import Radio, {RadioGroup} from "material-ui/Radio";
 import MatiereList from "../../MatiereList";
 import {Classes, MatieresSeconcaire, Programme, TARIFS_SECONDAIRE_PROGRAMME_IVOIRIEN} from "Constants";
@@ -8,10 +8,9 @@ import Grid from "material-ui/Grid";
 import ExpansionPanel, {ExpansionPanelSummary, ExpansionPanelDetails} from "material-ui/ExpansionPanel";
 import Typography from "material-ui/Typography";
 import PropTypes from "prop-types";
-import Checkbox from 'material-ui/Checkbox';
 import ExpandMoreIcon from "material-ui-icons/ExpandMore";
-import { withStyles } from 'material-ui/styles';
-import PriceTable from './PriceTable';
+import {withStyles} from "material-ui/styles";
+import PriceTable from "./PriceTable";
 
 const styles = theme => ({
     root: {
@@ -54,18 +53,20 @@ const styles = theme => ({
     },
 });
 
-const soixantePourcent =(montant) => montant * 0.6;
-const matiereScientifique =(montant) => montant * 0.6;
+const soixantePourcent = (montant) => montant * 0.6;
+const matiereScientifique = (montant) => montant * 0.6;
 
-const calculPrixMatiere=(classe, programme)=>{
-let result = undefined;
+const calculPrixMatiere = (classe, programme)=> {
+    let result = undefined;
     switch (programme) {
         case  Programme.IVOIRIEN : {
-            result= soixantePourcent( TARIFS_SECONDAIRE_PROGRAMME_IVOIRIEN [classe]);
+            result = soixantePourcent(TARIFS_SECONDAIRE_PROGRAMME_IVOIRIEN [classe]);
             break;
         }
-        case  Programme.FRANCAINS : {}
-        case  Programme.AMERICAIN : {}
+        case  Programme.FRANCAINS : {
+        }
+        case  Programme.AMERICAIN : {
+        }
     }
     return result;
 }
@@ -77,13 +78,13 @@ class InfoEleveForm extends React.Component {
             etablissement: '',
             classe: '',
             matieresSelectionnees: [],
-            prixParMatiere : undefined
+            prixParMatiere: undefined
         }
-       /* this.onTextFieldChange = this.onTextFieldChange.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.handleCreateModuleChange = this.handleCreateModuleChange.bind(this);
-        this.handleMatiereChange = this.handleMatiereChange.bind(this);
-        this.onSetEnseignantMatiere = this.onSetEnseignantMatiere.bind(this);*/
+        /* this.onTextFieldChange = this.onTextFieldChange.bind(this);
+         this.handleChange = this.handleChange.bind(this);
+         this.handleCreateModuleChange = this.handleCreateModuleChange.bind(this);
+         this.handleMatiereChange = this.handleMatiereChange.bind(this);
+         this.onSetEnseignantMatiere = this.onSetEnseignantMatiere.bind(this);*/
     }
 
 
@@ -98,18 +99,18 @@ class InfoEleveForm extends React.Component {
         this.setState({
             [name]: event.target.value,
         });
-        console.log("state : ",this.state)
+        console.log("state : ", this.state)
     };
 
     handleCreateModuleChange = name => event => {
 
-        this.setState((prevState, props)=>{
+        this.setState((prevState, props)=> {
 
-            let value =  prevState[name]==undefined ?true:!prevState[name];
+            let value = prevState[name] == undefined ? true : !prevState[name];
 
-         return {
-             [name]: value,
-         }
+            return {
+                [name]: value,
+            }
         });
         console.table(this.state);
     };
@@ -129,10 +130,10 @@ class InfoEleveForm extends React.Component {
     handleMatiereChange = event => {
         let {programme, classe} = this.state;
         matieresSelectionnees: event.target.value;
-       let prix =  calculPrixMatiere(classe,programme);
+        let prix = calculPrixMatiere(classe, programme);
         this.setState({
-                matieresSelectionnees: event.target.value,
-                prixParMatiere : prix
+            matieresSelectionnees: event.target.value,
+            prixParMatiere: prix
         })
     };
 
@@ -149,7 +150,8 @@ class InfoEleveForm extends React.Component {
                         <Typography className={classes.heading}> Idenfication du nouvel élève : </Typography>
                     </div>
                     <div className={classes.column}>
-                        <Typography className={classes.secondaryHeading}>{nomFamille ? nomFamille : "Nouvel"} , {prenoms ? prenoms : "Elève"}</Typography>
+                        <Typography className={classes.secondaryHeading}>{nomFamille ? nomFamille : "Nouvel"}
+                            , {prenoms ? prenoms : "Elève"}</Typography>
                     </div>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
@@ -212,41 +214,7 @@ class InfoEleveForm extends React.Component {
                                 </Grid>
                                 <Grid item xs={12}>
                                     {matieresSelectionnees.length > 0 &&
-
-                                    matieresSelectionnees.map(matiere=> {
-                                        let objMatiere =  MatieresSeconcaire.find(m=>m.value === matiere);
-                                       const codeMatiere =objMatiere.code;
-                                        return (
-                                            <div key={matiere}>
-                                                <PriceTable matieresSelectionnees={matieresSelectionnees}/>
-                                                {/*   <FormControl component="fieldset">
-                                                    <FormLabel component="legend"> Les enseignants pour {matiere}</FormLabel>
-
-                                                     <FormGroup row>
-                                                        <TextField label="Enseignant Ecole"
-                                                                   value={nomEnseignantEcole ? nomEnseignantEcole[objMatiere.code] : ''}
-                                                                   onChange={this.onSetEnseignantMatiere('nomEnseignantEcole',objMatiere.code)}/>
-                                                        <TextField label="Enseignant E.E."
-                                                                   value={nomEnseignantEE ? nomEnseignantEE[objMatiere.code] : ''}
-                                                                   onChange={this.onSetEnseignantMatiere('nomEnseignantEE', objMatiere.code)}/>
-
-                                                       {matieresSelectionnees.length >=2 &&
-                                                        <FormControlLabel
-                                                            control={
-                                                                <Checkbox
-                                                                    checked={this.state[`${objMatiere.code}-module-${objMatiere.code}`]}
-                                                                    onChange={this.handleCreateModuleChange(`${objMatiere.code}-module-${objMatiere.code}`)}
-                                                                    value={`${objMatiere.code}-module-${objMatiere.code}`}
-                                                                />
-                                                            }
-                                                            label={`Module ${objMatiere.type}?`}
-                                                        />}
-                                                    </FormGroup>
-                                                </FormControl>*/}
-                                                <br />
-
-                                            </div>)
-                                    })
+                                    <PriceTable matieresSelectionnees={matieresSelectionnees}/>
                                     }
                                 </Grid>
 

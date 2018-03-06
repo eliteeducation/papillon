@@ -3,10 +3,9 @@
  */
 
 import React from "react";
-import Tabs, {Tab} from "material-ui/Tabs";
-import Button from "material-ui/Button";
-import ProspectForm from "../../components/Form/ProspectForm/ProspectForm";
-import TabContainer from "../../components/TabContainer"
+import {BrowserRouter as Router, Link, Route} from "react-router-dom";
+import ClientList from "containers/ClientList/";
+import CreateClient from "containers/CreateClient/";
 const styles = {
     headline: {
         fontSize: 24,
@@ -20,6 +19,8 @@ const styles = {
 };
 
 
+
+
 class Accueil extends React.Component {
     state = {
         value: 0,
@@ -31,44 +32,33 @@ class Accueil extends React.Component {
     render() {
         const {value} = this.state;
         return (
-            <div >
-                <Tabs value={value} onChange={this.handleChange}>
-                    <Tab label="Prospects">
-                        <div>
-                            <h2 style={styles.headline}>Les prospects</h2>
+            <Router>
+                <div >
+
+                    <ul>
+                        <li>
+                            <Link to="/prospects">Prospects</Link>
+                        </li>
+                        <li>
+                            <Link to="/clients">Clients</Link>
+                        </li>
+                        <li>
+                            <Link to="/teachers">Enseignants</Link>
+                        </li>
+                        <li>
+                            <Link to="/compta">Comptabilité</Link>
+                        </li>
+                    </ul>
+<hr/>
+
+                    <Route path="/prospects" component={ClientList}/>
+                    <Route path="/clients" component={ClientList}/>
+                    <Route path="/clients/create" component={CreateClient}/>
 
 
-                        </div>
-                    </Tab>
 
-                    <Tab label="Clients">
-                        <div>
-                            <h2 style={styles.headline}>Les clients</h2>
-
-                            <Button variant="raised" color="secondary" style={styles.addButton}>
-                                Nouveau
-                            </Button>
-                        </div>
-                    </Tab>
-
-                    <Tab label="Enseignants"
-                         data-route="/home">
-                        <div>
-                            <h2 style={styles.headline}>Les enseignants</h2>
-
-                            <Button variant="raised" color="secondary" style={styles.addButton}>
-                                Nouveau
-                            </Button>
-                        </div>
-                    </Tab>
-                </Tabs>
-                {value === 0 && <TabContainer>
-
-                    <ProspectForm />
-                </TabContainer>}
-                {value === 1 && <TabContainer>Item Two</TabContainer>}
-                {value === 2 && <TabContainer>Item Three</TabContainer>}
-            </div>
+                </div>
+            </Router>
         );
     }
 }

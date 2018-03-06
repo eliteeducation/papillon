@@ -1,13 +1,16 @@
 import React, {Component} from "react";
-
 import "./App.css";
 import {clients} from "./lib/firebase";
 import Accueil from "./common/Accueil";
-import LoginForm from "./common/login/LoginForm";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+/*import ClientList from "containers/ClientList";*/
+import CreateClient from "containers/CreateClient/index";
 const style = {
     margin: 12,
 };
+
+
 
 
 class App extends Component {
@@ -43,6 +46,14 @@ class App extends Component {
     }
 
     showProspectForm() {
+        {  /* <div className="App">
+         <div className="App-header">
+         <h2>papillon</h2>
+         </div>
+         {!signedIn && <LoginForm onLogin={this.login}/>}
+         {signedIn && <Accueil/>}
+
+         </div>*/}
     }
 
     login() {
@@ -53,18 +64,41 @@ class App extends Component {
         let signedIn = this.state.signedIn
         console.log("signed : ", signedIn)
         return (
-            <div className="App">
-                <div className="App-header">
-                    <h2>papillon</h2>
-                </div>
-                {!signedIn && <LoginForm onLogin={this.login}/>}
-                {signedIn && <Accueil/>}
 
+        <Router>
+            <div>
+
+                <ul>
+                    <li>
+                        <Link to="/">Acceuil</Link>
+                    </li>
+                    <li>
+                        <Link to="/clients">Clients</Link>
+                    </li>
+                    <li>
+                        <Link to="/clients/create">Nouveau Client</Link>
+                    </li>
+
+
+                </ul>
+
+
+                <Route exact path="/" component={Accueil}/>
+                <Route path="/clients" component={ClientList}/>
+                <Route path="/clients/create" component={CreateClient}/>
             </div>
+        </Router>
         );
     }
 }
 ;
+
+
+const ClientList = ()=>(
+    <div>
+        <h1>Clients List</h1>
+    </div>
+);
 
 
 export default App;
