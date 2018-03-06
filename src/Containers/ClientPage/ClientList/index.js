@@ -1,6 +1,6 @@
 /**
  * Created by emma on 06/03/18.
  */
-import ClientList from 'containers/ClientList';
+import ClientList from './ClientList';
 
 export default ClientList;

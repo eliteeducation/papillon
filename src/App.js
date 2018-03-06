@@ -4,13 +4,9 @@ import {clients} from "./lib/firebase";
 import Accueil from "./common/Accueil";
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-/*import ClientList from "containers/ClientList";*/
-import CreateClient from "containers/CreateClient/index";
-const style = {
-    margin: 12,
-};
-
-
+import ClientList from "Containers/ClientPage/ClientList";
+import ClientPage from "Containers/ClientPage";
+import Header from "Containers/Header/";
 
 
 class App extends Component {
@@ -46,14 +42,8 @@ class App extends Component {
     }
 
     showProspectForm() {
-        {  /* <div className="App">
-         <div className="App-header">
-         <h2>papillon</h2>
-         </div>
-         {!signedIn && <LoginForm onLogin={this.login}/>}
-         {signedIn && <Accueil/>}
-
-         </div>*/}
+        {
+        }
     }
 
     login() {
@@ -65,40 +55,18 @@ class App extends Component {
         console.log("signed : ", signedIn)
         return (
 
-        <Router>
-            <div>
+            <Router>
+                <div>
+                    <Header/>
+                    <Route exact path="/" component={Accueil}/>
+                    <Route path="/clients" component={ClientPage}/>
 
-                <ul>
-                    <li>
-                        <Link to="/">Acceuil</Link>
-                    </li>
-                    <li>
-                        <Link to="/clients">Clients</Link>
-                    </li>
-                    <li>
-                        <Link to="/clients/create">Nouveau Client</Link>
-                    </li>
-
-
-                </ul>
-
-
-                <Route exact path="/" component={Accueil}/>
-                <Route path="/clients" component={ClientList}/>
-                <Route path="/clients/create" component={CreateClient}/>
-            </div>
-        </Router>
+                </div>
+            </Router>
         );
     }
 }
-;
-
-
-const ClientList = ()=>(
-    <div>
-        <h1>Clients List</h1>
-    </div>
-);
+; //Header
 
 
 export default App;

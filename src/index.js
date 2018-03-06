@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
-import {MuiThemeProvider, createMuiTheme} from "material-ui/styles";
+
 import {Provider} from "react-redux";
 import {createStore, combineReducers} from "redux";
 import {reducer as formReducer} from "redux-form";
@@ -11,19 +11,17 @@ import {reducer as formReducer} from "redux-form";
 
 
 const rootReducer = combineReducers({
-
     form: formReducer
 })
 
 const store = createStore(rootReducer);
 
-
-ReactDOM.render(
+const Main  = ()=> (
     <Provider store={store}>
-        <MuiThemeProvider theme={createMuiTheme()}>
-            <App/>
-        </MuiThemeProvider>
-    </Provider>,
+        <App/>
+    </Provider>
+)
+ReactDOM.render(<Main/>,
     document.getElementById('root')
 );
 
