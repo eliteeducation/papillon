@@ -23,7 +23,6 @@ class Accueil extends React.Component {
                     <hr/>
 
                     <Route path="/prospects" component={ClientList}/>
-                    <Route path="/clients" component={ClientPage}/>
                     <Route path="/clients/create" component={CreateClient}/>
 
 

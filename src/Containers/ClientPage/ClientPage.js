@@ -14,7 +14,7 @@ const ClientPage = ()=>(
         <Button bsStyle="primary" href={"/clients/create"}>Nouveau Client</Button>
         <Router>
             <div>
-                <Route path="/clients" component={ClientList}/>
+                <Route exact path="/clients" component={ClientList}/>
                 <Route path="/clients/create" component={CreateClient}/>
             </div>
         </Router>
