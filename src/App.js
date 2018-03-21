@@ -1,13 +1,9 @@
 import React, {Component} from "react";
 import "./App.css";
 import {clients} from "./lib/firebase";
-import Accueil from "./common/Accueil";
-import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import ClientList from "Containers/ClientPage/ClientList";
-import ClientPage from "Containers/ClientPage";
-import Header from "Containers/Header/";
-
+import PrimaryLayout from "./Containers/Layout/PrimaryLayout";
 
 class App extends Component {
     constructor(props) {
@@ -42,8 +38,7 @@ class App extends Component {
     }
 
     showProspectForm() {
-        {
-        }
+
     }
 
     login() {
@@ -54,14 +49,16 @@ class App extends Component {
         let signedIn = this.state.signedIn
         console.log("signed : ", signedIn)
         return (
-
             <Router>
-                <div>
-                    <Header/>
-                    <Route exact path="/" component={Accueil}/>
-                    <Route path="/clients" component={ClientPage}/>
+                <Switch>
 
-                </div>
+                    {/*
+                    Q : si on met exact, ça ne marche plus
+                    Q : si on remplace Switch par route, ça ne marche plus
+                    <Route exact path="/" component={PrimaryLayout}/>*/}
+                    <Route path="/app" component={PrimaryLayout}/>
+                    <Redirect to="/app"/>
+                </Switch>
             </Router>
         );
     }
