@@ -6,27 +6,14 @@ import { Switch, Route, Redirect,NavLink, withRouter } from 'react-router-dom';
 import ClientList from "../../ClientPage/ClientList/";
 import CreateClient from "../../ClientPage/CreateClient/";
 
+import ClientNav from "./ClientsNav";
 
-
-const ClientNav =  ()=> (
-
-   <nav className="navbar navbar-expand-lg">
-        <ul className="nav">
-            <li className="nav-item">
-                <NavLink to="clients/create">Nouveau</NavLink>
-            </li>
-            <li className="nav-item">
-                <NavLink to="clients/">Clients</NavLink>
-            </li>
-        </ul>
-    </nav>
-);
 
 
 const ClientsLayout = ({ match }) => {
     console.log("ClientsLayout : ", match);
 
-    return <div className="primary-layout">
+    return (<div className="primary-layout">
         <ClientNav />
         <main>
             <Switch>
@@ -34,7 +21,7 @@ const ClientsLayout = ({ match }) => {
                 <Route path={`${match.path}/create`} component={CreateClient}/>
             </Switch>
         </main>
-    </div>
+    </div>)
 }
 
 export default ClientsLayout;

@@ -9,9 +9,6 @@ import { Switch, Route, Redirect,NavLink, withRouter } from 'react-router-dom'
 
 import TeachersList from "../../TeachersList/";
 import TeacherCreate from "../../TeacherCreate/";
-//import ClientPage from "../../ClientPage";
-//import Header from "Containers/Header/";
-
 
 const TeacherNav = withRouter( ({match})=>(
 

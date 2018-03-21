@@ -5,8 +5,8 @@
 import React from "react";
 import {BrowserRouter as Router, Link, Route} from "react-router-dom";
 
-
-class Accueil extends React.Component {
+import Header from "../Header"
+class Accueil extends React.PureComponent {
     state = {
         value: 0,
     };
@@ -17,6 +17,9 @@ class Accueil extends React.Component {
         return (
             <Router>
                 <div >
+
+
+
                     <hr/>
 
 

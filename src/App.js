@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import "./App.css";
 import {clients} from "./lib/firebase";
-import {BrowserRouter as Router, Route} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import PrimaryLayout from "./Containers/Layout/PrimaryLayout";
 
@@ -50,9 +50,15 @@ class App extends Component {
         console.log("signed : ", signedIn)
         return (
             <Router>
-                <div>
-                    <Route exact path="/" component={PrimaryLayout}/>
-                </div>
+                <Switch>
+
+                    {/*
+                    Q : si on met exact, ça ne marche plus
+                    Q : si on remplace Switch par route, ça ne marche plus
+                    <Route exact path="/" component={PrimaryLayout}/>*/}
+                    <Route path="/app" component={PrimaryLayout}/>
+                    <Redirect to="/app"/>
+                </Switch>
             </Router>
         );
     }
