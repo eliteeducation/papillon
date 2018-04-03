@@ -10,10 +10,10 @@ const TeachersNav = withRouter( ({match})=>(
     <nav className="navbar navbar-expand-lg">
         <ul className="nav">
             <li className="nav-item">
-                <NavLink to={`${match.path}/create`}>Nouveau</NavLink>
+                <a class="nav-link" href={`${match.path}/create`}>Nouveau</a>
             </li>
             <li className="nav-item">
-                <NavLink to={`${match.path}/`}>Enseignants</NavLink>
+                <a class="nav-link" href={`${match.path}/`}>Enseignants</a>
             </li>
         </ul>
     </nav>

@@ -11,8 +11,6 @@ import ClientNav from "./ClientsNav";
 import {clients} from '../../../lib/database'
 
 const ClientsLayout = ({ match }) => {
-    console.log("ClientsLayout : ", match);
-
     return (<div className="primary-layout">
         <ClientNav />
         <main>
