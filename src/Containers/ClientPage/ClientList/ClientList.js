@@ -6,16 +6,17 @@ import Paper from 'material-ui/Paper';
 import {GroupingState,IntegratedGrouping} from '@devexpress/dx-react-grid';
 import { Grid,Table,TableHeaderRow,TableGroupRow} from '@devexpress/dx-react-grid-bootstrap3';
 
-class ClientList extends React.PureComponent {
+class ClientList extends React.Component {
     constructor(props) {
         super(props);
-
+console.log("props : " ,props)
+console.log("props : " ,props.params)
         this.state = {
             columns: [
-                { name: 'name', title: 'Name' },
-                { name: 'sex', title: 'Sex' },
-                { name: 'city', title: 'City' },
-                { name: 'car', title: 'Car' },
+                { name: 'firstName', title: 'Nom De Famille' },
+                { name: 'email', title: 'Adresse Email' },
+                { name: 'quartier', title: 'Quartier' },
+                { name: 'commune', title: 'Commune' },
             ],
             rows:  [
                 { sex: "Female", name: "Sandra", city: "Las Vegas", car: "Audi A4" },
@@ -33,6 +34,7 @@ class ClientList extends React.PureComponent {
                 { sex: "Male", name: "William", city: "Los Angeles", car: "Honda Civic" },
                 { sex: "Male", name: "Mark", city: "Austin", car: "Nissan Altima" }
             ],
+          // rows:props.params.clients
         };
     }
     render() {
@@ -45,7 +47,7 @@ class ClientList extends React.PureComponent {
                     rows={rows}
                     columns={columns}>
                     <GroupingState
-                        grouping={[{ columnName: 'city' }]}
+                        grouping={[{ columnName: 'commune' }]}
                     />
                     <IntegratedGrouping />
                     <Table />

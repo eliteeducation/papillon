@@ -13,7 +13,7 @@ const PrimaryLayout = ({match}) => {
     console.log("PrimaryLayout : ", match)
     return (<div className="primary-layout">
         <Header />
-        <main>
+        <div className="container-fluid">
 
                 <Switch>
 
@@ -22,7 +22,7 @@ const PrimaryLayout = ({match}) => {
                     <Redirect to={`${match.path}/`}/>
                 </Switch>
 
-        </main>
+        </div>
     </div>)
 }
 

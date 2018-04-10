@@ -8,7 +8,7 @@ import CreateClient from "../../ClientPage/CreateClient/";
 
 import ClientNav from "./ClientsNav";
 
-
+import {clients} from '../../../lib/database'
 
 const ClientsLayout = ({ match }) => {
     console.log("ClientsLayout : ", match);
@@ -17,7 +17,7 @@ const ClientsLayout = ({ match }) => {
         <ClientNav />
         <main>
             <Switch>
-                <Route exact path={`${match.path}/`} component={ClientList}/>
+                <Route exact path={`${match.path}/`}  render={(props)=><ClientList {...props} clients={clients}/>}/>
                 <Route path={`${match.path}/create`} component={CreateClient}/>
             </Switch>
         </main>

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import "./App.css";
-import {clients} from "./lib/firebase";
+import {clients} from "./lib/database";
 import {BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import PrimaryLayout from "./Containers/Layout/PrimaryLayout";
