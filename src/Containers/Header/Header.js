@@ -2,27 +2,33 @@
  * Created by emma on 06/03/18.
  */
 import React from "react";
-import {Link, withRouter} from "react-router-dom";
+import {withRouter} from "react-router-dom";
 const Header = withRouter(({match})=> (
     <div>
-        <nav className="navbar navbar-expand-lg">
-            <ul className="nav">
+        <nav className="navbar navbar-expand-md navbar-light bg-light">
+            <a className="navbar-brand" href={`${match.path}/`}>Papillon</a>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarContent">
+            <ul className="nav navbar-nav mr-auto">
                 <li className="nav-item">
-                    <Link to={`${match.path}/`}>Accueil</Link>
+                    <a className="nav-link" href={`${match.path}/`}>Accueil</a>
                 </li>
                 <li className="nav-item">
-                    <Link to={`${match.path}/clients`}>Clients</Link>
+                    <a className="nav-link" href={`${match.path}/clients`}>Clients</a>
                 </li>
                 <li className="nav-item">
-                    <Link to={`${match.path}/teachers`}>Enseignants</Link>
+                    <a className="nav-link" href={`${match.path}/teachers`}>Enseignants</a>
                 </li>
             </ul>
+                </div>
         </nav>
 
         <div className="jumbotron jumbotron-fluid">
             <div className="container">
-                <h1 className="display-3">Welcome to my website</h1>
-                <p className="lead">I'm a developer and designer. Check my portfolio below</p>
+                <h1 className="display-3">Bienvenue sur Papaillon</h1>
+                <p className="lead">CRM de Elite Education</p>
             </div>
         </div>
     </div>

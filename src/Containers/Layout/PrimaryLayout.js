@@ -2,10 +2,9 @@
  * Created by eblonvia on 20/03/2018.
  */
 import React from "react";
-import {Switch, Route, Redirect, BrowserRouter as Router} from "react-router-dom";
+import {Switch, Route, Redirect} from "react-router-dom";
 import ClientsLayout from "./ClientsLayout/";
 import TeachersLayout from "./TeachersLayout/";
-import Accueil from "../Accueil";
 import Header from "../Header/";
 
 

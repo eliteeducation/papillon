@@ -2,8 +2,8 @@
  * Created by eblonvia on 03/04/2018.
  */
 
-import React from 'react'
-import { NavLink ,withRouter} from 'react-router-dom'
+import React from "react";
+import {withRouter} from "react-router-dom";
 
 const TeachersNav = withRouter( ({match})=>(
 
