@@ -110,7 +110,7 @@ class CreateClient extends React.Component {
                                     <div className="card-header" id="headingTwo">
                                         <h5 className="mb-0">
                                             <button type="button" className="btn btn-primary collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                Collaps ible Group Item #2
+                                               Liste des enfants ajoutés
                                             </button>
                                         </h5>
                                     </div>

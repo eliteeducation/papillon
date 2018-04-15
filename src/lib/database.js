@@ -57,6 +57,10 @@ export const saveClient = (data)=>{
 export const saveStudent  = (clientId, studentData)=>{
     if(clientId) {
         studentData.parentId = clientId;
+        firebase.database().ref("clients/" + clientId).once('value',snap=>{
+            studentData.parentName=   snap.val().lastName + " " + snap.val().firstName;
+            studentData.commune=   snap.val().commune;
+        });
         firebase.database().ref("clients/" + clientId + "/students").push(studentData);
     }
     students.push(studentData)

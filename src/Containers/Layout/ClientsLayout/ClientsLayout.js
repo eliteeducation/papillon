@@ -8,7 +8,7 @@ import CreateClient from "../../ClientPage/CreateClient/";
 
 import ClientNav from "./ClientsNav";
 
-import {clients} from '../../../lib/database'
+import {clients, students} from '../../../lib/database'
 /*clients.once('value', snapshot=>{
     snapshot.forEach(data=>console.log("val : ", data.val()))
    // console.log("val : ", snapshot.val())

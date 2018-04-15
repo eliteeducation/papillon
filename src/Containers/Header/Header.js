@@ -33,8 +33,8 @@ const Header = withRouter(({match})=> (
 
         <div className="jumbotron jumbotron-fluid">
             <div className="container">
-                <h1 className="display-3">Bienvenue sur Papaillon</h1>
-                <p className="lead">CRM de Elite Education</p>
+                <h1 className="display-2">Bienvenue sur Papillon</h1>
+                <p className="lead">L'application de Gestion Métier de Elite Education</p>
             </div>
         </div>
     </div>

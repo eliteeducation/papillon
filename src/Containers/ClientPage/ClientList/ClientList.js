@@ -2,19 +2,16 @@
  * Created by emma on 06/03/18.
  */
 import React from "react";
-import Paper from "material-ui/Paper";
-import {GroupingState, IntegratedGrouping} from "@devexpress/dx-react-grid";
-import {Grid, Table, TableHeaderRow, TableGroupRow} from "@devexpress/dx-react-grid-bootstrap3";
-class ClientList extends React.Component {
+import {Grid, Table, TableHeaderRow, TableRowDetail} from "@devexpress/dx-react-grid-bootstrap4";
+import {RowDetailState} from "@devexpress/dx-react-grid";
+import {Card} from "reactstrap";
+class ClientList extends React.PureComponent {
     constructor(props) {
         super(props);
-
         props.clients.once('value', snapshot=> {
             let rows = []
             snapshot.forEach((data)=> {
-
                 rows.push(data.val());
-
             });
             this.setState({rows})
         })
@@ -30,15 +27,16 @@ class ClientList extends React.Component {
         });
         this.state = {
             columns: [
-                {name: 'lastName', title: 'Nom De Famille'},
+                {name: 'lastName', title: 'Famille'},
+                {name: 'commune', title: 'Commune'},
                 {name: 'email', title: 'Adresse Email'},
                 {name: 'quartier', title: 'Quartier'},
-                {name: 'commune', title: 'Commune'},
             ],
-            rows: []
-
+            rows: [],
+            expandedRowIds: [2, 5],
         }
         ;
+        this.changeExpandedDetails = expandedRowIds => this.setState({expandedRowIds});
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
@@ -57,32 +55,41 @@ class ClientList extends React.Component {
         }
     }
 
+
     render() {
-        const {rows, columns} = this.state;
-        console.log("in the render : ", rows)
+        const {rows, columns, expandedRowIds} = this.state;
+
         return (
 
-            <Paper>
+            <Card>
                 <Grid
-
                     rows={rows}
                     columns={columns}>
-                    <GroupingState
-                        grouping={[{columnName: 'commune'}]}
+                    <RowDetailState
+                        expandedRowIds={expandedRowIds}
+                        onExpandedRowIdsChange={this.changeExpandedDetails}
                     />
-                    <IntegratedGrouping />
                     <Table />
                     <TableHeaderRow />
-                    <TableGroupRow />
+                    <TableRowDetail
+                        contentComponent={RowDetail}
+                    />
                 </Grid>
-            </Paper>
+            </Card>
         );
     }
 }
+const RowDetail = ({row}) => {
+        if (row.students) {
+            return Object.keys(row.students).map(key=> {
+                    let stud = row.students[key];
+                    return <div key={key}>Details for {stud.firstName} from {stud.email}</div>
+                }
+            );
+        }
+        return <p> pas d'enfant scolarisé pour le moment</p>
+    }
+    ;
 
-/*const ClientList = ()=>(
- <div>
- <h1>Clients List</h1>
- </div>
- );*/
+
 export default ClientList;
