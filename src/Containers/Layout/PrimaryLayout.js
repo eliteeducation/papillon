@@ -13,7 +13,6 @@ const PrimaryLayout = ({match}) => {
     return (<div className="primary-layout">
         <Header />
         <div className="container-fluid">
-
                 <Switch>
 
                     <Route path={`${match.path}/clients`} component={ClientsLayout}/>

@@ -47,60 +47,7 @@ export const Classes = [
     {nom: 'TERMINALE'}
 ]
 
-export const TypeMatiere = {
-    TECHNIQUE: 'TECHNIQUE',
-    SCIENTIFIQUE: 'SCIENTIFIQUE',
-    LITTERAIRE: 'LITTERAIRE'
-}
 
-export const MatieresSeconcaire = [
-    {
-        value: 'Mathématique',
-        code: 'math',
-        type:TypeMatiere.SCIENTIFIQUE
-
-    },
-    {
-        value: 'Physique',
-        code: 'phys',
-        type:TypeMatiere.SCIENTIFIQUE
-    },
-    {
-        value: 'Histoire Géo',
-        code: 'histg',
-        type:TypeMatiere.LITTERAIRE
-    },
-    {
-        value: 'Anglais',
-        code: 'angl',
-        type:TypeMatiere.LITTERAIRE
-    },
-    {
-        value: 'Français',
-        code: 'fran',
-        type:TypeMatiere.LITTERAIRE
-    },
-    {
-        value: 'Phylosophie',
-        code: 'phylo',
-        type:TypeMatiere.LITTERAIRE
-    },
-    {
-        value: 'SVT',
-        code: 'svt',
-        type:TypeMatiere.SCIENTIFIQUE
-    },
-    {
-        value: 'Comptabilité',
-        code: 'compt',
-        type:TypeMatiere.TECHNIQUE
-    },
-    {
-        value: 'Espagnol',
-        code: 'espa',
-        type:TypeMatiere.LITTERAIRE
-    }
-]
 
 
 

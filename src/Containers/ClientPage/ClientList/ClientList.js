@@ -30,57 +30,13 @@ class ClientList extends React.Component {
         });
         this.state = {
             columns: [
-                {name: 'firstName', title: 'Nom De Famille'},
+                {name: 'lastName', title: 'Nom De Famille'},
                 {name: 'email', title: 'Adresse Email'},
                 {name: 'quartier', title: 'Quartier'},
                 {name: 'commune', title: 'Commune'},
             ],
             rows: []
-            /*  rows: [
-             {
-             commune: "Koumassi",
-             email: "emmanuel.blonvia@gmail.com",
-             firstName: "ZAGADOU",
-             quartier: "remblais",
-             telOne: "6"
-             }
-             ,
-             {
-             commune: "MArcory",
-             email: "emmanuel.blonvia@gmail.com",
-             firstName: "Coffi",
-             quartier: "Sainte Théres",
-             telOne: "6"
-             }
-             ,
 
-             {
-             commune: "2",
-             email: "eblonvia@zaza.fr",
-             firstName: "dqsd",
-             floorNumber: "4",
-             houseNumber: "180 avenue de la division Leclerc"
-             }
-             ,
-             {
-             commune: "2",
-             email: "eblonvia@cie.fr",
-             firstName: "Kessy",
-             floorNumber: "8",
-             houseNumber: "180 avenue de la division Leclerc",
-             }                ,
-             {
-             commune: "2",
-             email: "eblonvia@cie.fr",
-             firstName: "Kessy",
-             floorNumber: "8",
-             houseNumber: "180 avenue de la division Leclerc"
-             }
-             ,
-             {
-             commune: "1", email: "gfdg@toto.fr", firstName: "dsfq", floorNumber: "gdh", houseNumber: "gdh"
-             }
-             ]*/
         }
         ;
     }

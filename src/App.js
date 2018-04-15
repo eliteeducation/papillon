@@ -1,7 +1,7 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import "./App.css";
-import {clients} from "./lib/database";
-import {BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
+import { clients } from "./lib/database";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import PrimaryLayout from "./Containers/Layout/PrimaryLayout";
 
@@ -42,7 +42,7 @@ class App extends Component {
     }
 
     login() {
-        this.setState({signedIn: true});
+        this.setState({ signedIn: true });
     }
 
     render() {
@@ -56,8 +56,8 @@ class App extends Component {
                     Q : si on met exact, ça ne marche plus
                     Q : si on remplace Switch par route, ça ne marche plus
                     <Route exact path="/" component={PrimaryLayout}/>*/}
-                    <Route path="/app" component={PrimaryLayout}/>
-                    <Redirect to="/app"/>
+                    <Route path="/app" component={PrimaryLayout} />
+                    <Redirect to="/app" />
                 </Switch>
             </Router>
         );

@@ -21,6 +21,12 @@ const Header = withRouter(({match})=> (
                 <li className="nav-item">
                     <a className="nav-link" href={`${match.path}/teachers`}>Enseignants</a>
                 </li>
+                <li className="nav-item">
+                    <a className="nav-link" href={`${match.path}/visits`}>Visites</a>
+                </li>
+                <li className="nav-item">
+                    <a className="nav-link" href={`${match.path}/admin`}>Admin</a>
+                </li>
             </ul>
                 </div>
         </nav>
