@@ -99,28 +99,27 @@ class ClientList extends React.PureComponent {
                     defaultPageSize={10}
                     className="-striped -highlight"
                     SubComponent={row => {
-                        return (
-                            <div style={{padding: "20px"}}>
-                                <em>
-                                    TODO !
+                        let students = row.original.students;
+                        if (students) {
+                            return (
+                                <div style={{padding: "20px"}}>
+                                    <em>
+                                        Enfants :
+                                    </em>
+                                    {students &&
+                                    <ReactTable
+                                        data={Object.keys(students).map(key => students[key])}
+                                        columns={columns}
+                                        defaultPageSize={3}
+                                        showPagination={false}
+                                    />
+                                    }
 
-                                </em>
-                                <ReactTable
-                                    data={row.students}
-                                    columns={columns}
-                                    defaultPageSize={3}
-                                    showPagination={false}
-                                    SubComponent={row => {
-                                        return (
-                                            <div style={{padding: "20px"}}>
-                                                Nom : {row.firstName}
-                                            </div>
-                                        );
-                                    }}
-                                />
+                                </div>
+                            );
+                        }
 
-                            </div>
-                        );
+                        return <div>Pas d'enfants inscrits pour le moment !</div>
                     }}
                 >
 
