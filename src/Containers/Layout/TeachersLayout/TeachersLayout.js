@@ -5,8 +5,8 @@
 
 import React from "react";
 import {Switch, Route, Redirect} from "react-router-dom";
-import TeachersList from "../../TeachersList/";
-import TeacherCreate from "../../TeacherCreate/";
+import TeachersList from "./TeachersList/";
+import TeacherCreate from "./TeacherCreate/";
 import TeachersNav from "../../Layout/TeachersLayout/TeachersNav";
 
 

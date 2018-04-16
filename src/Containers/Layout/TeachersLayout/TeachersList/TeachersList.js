@@ -5,9 +5,9 @@
  * Created by emma on 06/03/18.
  */
 import React from 'react';
-import Paper from 'material-ui/Paper';
+import {Card} from "reactstrap";
 import {GroupingState,IntegratedGrouping} from '@devexpress/dx-react-grid';
-import { Grid,Table,TableHeaderRow,TableGroupRow} from '@devexpress/dx-react-grid-bootstrap3';
+import { Grid,Table,TableHeaderRow,TableGroupRow} from '@devexpress/dx-react-grid-bootstrap4';
 
 class TeachersList extends React.PureComponent {
     constructor(props) {
@@ -43,7 +43,7 @@ class TeachersList extends React.PureComponent {
 
         return (
 
-            <Paper>
+            <Card>
                 <h1>Liste des profs</h1>
                 <Grid
                     rows={rows}
@@ -56,14 +56,10 @@ class TeachersList extends React.PureComponent {
                     <TableHeaderRow />
                     <TableGroupRow />
                 </Grid>
-            </Paper>
+            </Card>
         );
     }
 }
 
-/*const ClientList = ()=>(
- <div>
- <h1>Clients List</h1>
- </div>
- );*/
+
 export default TeachersList;

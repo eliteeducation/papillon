@@ -3,7 +3,7 @@
  */
 import React from "react";
 import PropTypes from "prop-types";
-//import {saveStudent} from "../../../../lib/database";
+//import {saveStudent} from "../../../../services/database";
 
 
 class CreateStudent extends React.Component {

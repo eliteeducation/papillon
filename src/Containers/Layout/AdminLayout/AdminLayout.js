@@ -5,7 +5,7 @@ import CreateClient from "../../ClientPage/CreateClient/";
 
 import AdminTabs from "./AdminTabs";
 
-import {clients} from '../../../lib/database'
+import {clients} from '../../../services/database'
 
 const AdminLayout = ({ match }) => {
     return (<div className="primary-layout">

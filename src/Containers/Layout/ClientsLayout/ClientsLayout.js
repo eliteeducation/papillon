@@ -3,16 +3,13 @@
  */
 import React from 'react';
 import { Switch, Route} from 'react-router-dom';
-import ClientList from "../../ClientPage/ClientList/";
-import CreateClient from "../../ClientPage/CreateClient/";
+import ClientList from "./ClientList/";
+import CreateClient from "./CreateClient/";
 
 import ClientNav from "./ClientsNav";
 
-import {clients, students} from '../../../lib/database'
-/*clients.once('value', snapshot=>{
-    snapshot.forEach(data=>console.log("val : ", data.val()))
-   // console.log("val : ", snapshot.val())
-})*/
+import {clients, students} from '../../../services/database'
+
 const ClientsLayout = ({ match }) => {
     return (<div className="primary-layout">
         <ClientNav />

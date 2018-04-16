@@ -17,13 +17,13 @@ firebase.initializeApp(config);
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
 
-        var displayName = user.displayName;
-        var email = user.email;
-        var emailVerified = user.emailVerified;
-        var photoURL = user.photoURL;
-        var isAnonymous = user.isAnonymous;
-        var uid = user.uid;
-        var providerData = user.providerData;
+        const displayName = user.displayName;
+        const email = user.email;
+        const emailVerified = user.emailVerified;
+        const photoURL = user.photoURL;
+        const isAnonymous = user.isAnonymous;
+        const uid = user.uid;
+        const providerData = user.providerData;
 
     } else {
 
@@ -66,6 +66,8 @@ export const saveStudent  = (clientId, studentData)=>{
     students.push(studentData)
 }
 
+
+//TODO gerer ces données ne BDD
 export const matieres= [
     {
         value: 'Mathématique',

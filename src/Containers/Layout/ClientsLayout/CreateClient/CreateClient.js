@@ -2,7 +2,7 @@
  * Created by emma on 06/03/18.
  */
 import React from "react";
-import {communes, matieres, saveStudent,saveClient} from "../../../lib/database";
+import {communes, matieres, saveStudent,saveClient} from "../../../../services/database";
 import CreateStudent from "./CreateStudent/";
 class CreateClient extends React.Component {
     state = {
