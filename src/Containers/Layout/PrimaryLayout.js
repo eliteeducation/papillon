@@ -9,7 +9,7 @@ import Header from "../Header/";
 
 
 const PrimaryLayout = ({match}) => {
-    console.log("PrimaryLayout : ", match)
+
     return (<div className="primary-layout">
         <Header />
         <div className="container-fluid">

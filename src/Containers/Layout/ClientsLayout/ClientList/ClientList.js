@@ -2,11 +2,10 @@
  * Created by emma on 06/03/18.
  */
 import React from "react";
-import {Grid, Table, TableHeaderRow, TableRowDetail} from "@devexpress/dx-react-grid-bootstrap4";
-import {RowDetailState} from "@devexpress/dx-react-grid";
 import ReactTable from 'react-table';
 import {Card} from "reactstrap";
 import "react-table/react-table.css";
+
 class ClientList extends React.PureComponent {
     constructor(props) {
         super(props);
@@ -92,9 +91,7 @@ class ClientList extends React.PureComponent {
 
     render() {
         const {rows, columns} = this.state;
-console.log("rows : ", rows)
         return (
-
             <Card>
                 <ReactTable
                     data={rows}
@@ -103,9 +100,9 @@ console.log("rows : ", rows)
                     className="-striped -highlight"
                     SubComponent={row => {
                         return (
-                            <div style={{ padding: "20px" }}>
+                            <div style={{padding: "20px"}}>
                                 <em>
-                                   TODO !
+                                    TODO !
 
                                 </em>
                                 <ReactTable
@@ -115,7 +112,7 @@ console.log("rows : ", rows)
                                     showPagination={false}
                                     SubComponent={row => {
                                         return (
-                                            <div style={{ padding: "20px" }}>
+                                            <div style={{padding: "20px"}}>
                                                 Nom : {row.firstName}
                                             </div>
                                         );

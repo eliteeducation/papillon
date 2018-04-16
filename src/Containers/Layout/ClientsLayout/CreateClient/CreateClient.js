@@ -2,6 +2,7 @@
  * Created by emma on 06/03/18.
  */
 import React from "react";
+import {Redirect} from "react-router-dom";
 import {communes, matieres, saveStudent,saveClient} from "../../../../services/database";
 import CreateStudent from "./CreateStudent/";
 class CreateClient extends React.Component {
@@ -34,11 +35,17 @@ class CreateClient extends React.Component {
 
     onSaveClient = (event) => {
         event.preventDefault();
-        this.state.clientId =saveClient(this.state)
+        let clientId =saveClient(this.state)
+        this.setState({clientId});
+
     }
 
     render() {
-
+        const {clientId} = this.state;
+        const {match} = this.props;
+        if (clientId) {
+            return <Redirect to={`/app/clients/`} />
+        }
         return (
             <form onSubmit={this.onSaveClient}>
                 <div className="container-fluid">
