@@ -69,7 +69,7 @@ class ClientList extends React.PureComponent {
             expandedRowIds: [2, 5],
         }
         ;
-        this.changeExpandedDetails = expandedRowIds => this.setState({expandedRowIds});
+
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
@@ -88,7 +88,7 @@ class ClientList extends React.PureComponent {
         }
     }
 
-
+    /*TODO changer le second columns pour l'adapter au besoin du sous composant*/
     render() {
         const {rows, columns} = this.state;
         return (
@@ -98,48 +98,37 @@ class ClientList extends React.PureComponent {
                     columns={columns}
                     defaultPageSize={10}
                     className="-striped -highlight"
-                    SubComponent={row => {
-                        let students = row.original.students;
-                        if (students) {
-                            return (
-                                <div style={{padding: "20px"}}>
-                                    <em>
-                                        Enfants :
-                                    </em>
-                                    {students &&
-                                    <ReactTable
-                                        data={Object.keys(students).map(key => students[key])}
-                                        columns={columns}
-                                        defaultPageSize={3}
-                                        showPagination={false}
-                                    />
-                                    }
-
-                                </div>
-                            );
-                        }
-
-                        return <div>Pas d'enfants inscrits pour le moment !</div>
-                    }}
-                >
-
+                    SubComponent={RowDetail (columns)}>
+                   
                 </ReactTable>
             </Card>
         );
     }
 }
 
-const RowDetail = ({row}) => {
-        if (row.students) {
-            return Object.keys(row.students).map(key => {
-                    let stud = row.students[key];
-                    return <div key={key}>Details for {stud.firstName} from {stud.email}</div>
+const RowDetail =  columns => row => {
+    let students = row.original.students;
+    if (students) {
+        return (
+            <div style={{padding: "20px"}}>
+                <em>
+                    Enfants :
+                </em>
+                {students &&
+                <ReactTable
+                    data={Object.keys(students).map(key => students[key])}
+                    columns={columns}
+                    defaultPageSize={3}
+                    showPagination={false}
+                />
                 }
-            );
-        }
-        return <p> pas d'enfant scolarisé pour le moment</p>
+
+            </div>
+        );
     }
-;
+
+    return <div>Pas d'enfants inscrits pour le moment !</div>
+};
 
 
 export default ClientList;
