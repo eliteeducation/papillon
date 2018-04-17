@@ -2,7 +2,7 @@
  * Created by emma on 18/08/17.
  */
 
-import firebase from 'firebase';
+import firebase from "firebase";
 
 // Initialize Firebase
 var config = {
@@ -31,17 +31,17 @@ firebase.auth().onAuthStateChanged(function (user) {
 });
 
 
-export const clients =  firebase.database().ref("clients");
-export const enseignants =  firebase.database().ref("enseignants");
-export const students =  firebase.database().ref("students");
+export const clients = firebase.database().ref("clients");
+export const enseignants = firebase.database().ref("enseignants");
+export const students = firebase.database().ref("students");
 
-export const etablissements =  firebase.database().ref("etablissements");
-export const rendezVous =  firebase.database().ref("rendezVous");
-export const partenaires =  firebase.database().ref("partenaires");
+export const etablissements = firebase.database().ref("etablissements");
+export const rendezVous = firebase.database().ref("rendezVous");
+export const partenaires = firebase.database().ref("partenaires");
 
 
 //Ref data : quartier, matieres,
-export const refData =  firebase.database().ref("refData");
+export const refData = firebase.database().ref("refData");
 
 //export const matieres =  firebase.database().ref("matieres");
 
@@ -51,15 +51,31 @@ export const TypeMatiere = {
     LITTERAIRE: 'LITTERAIRE'
 }
 
-export const saveClient = (data)=>{
+
+clients.on('child_added', child=> {
+    console.log("added : ", child.val())
+    let val = child.val();
+    val.clientId = child.key;
+    // clients.ref(child.key+"/");
+    // console.log("ref client : ", firebase.database().ref("clients/" + child.key))
+    firebase.database().ref("clients/" + child.key).set(val)
+})
+
+export  const getClientById = (clientId)=>cb=> {
+    clients.child(clientId).once('value', snapshot=> {
+       cb( snapshot.val());
+    })
+};
+
+export const saveClient = (data)=> {
     return clients.push(data).key;
 }
-export const saveStudent  = (clientId, studentData)=>{
-    if(clientId) {
+export const saveStudent = (clientId, studentData)=> {
+    if (clientId) {
         studentData.parentId = clientId;
-        firebase.database().ref("clients/" + clientId).once('value',snap=>{
-            studentData.parentName=   snap.val().lastName + " " + snap.val().firstName;
-            studentData.commune=   snap.val().commune;
+        firebase.database().ref("clients/" + clientId).once('value', snap=> {
+            studentData.parentName = snap.val().lastName + " " + snap.val().firstName;
+            studentData.commune = snap.val().commune;
         });
         firebase.database().ref("clients/" + clientId + "/students").push(studentData);
     }
@@ -68,78 +84,78 @@ export const saveStudent  = (clientId, studentData)=>{
 
 
 //TODO gerer ces données ne BDD
-export const matieres= [
+export const matieres = [
     {
         value: 'Mathématique',
         code: 'math',
-        type:TypeMatiere.SCIENTIFIQUE
+        type: TypeMatiere.SCIENTIFIQUE
 
     },
     {
         value: 'Physique',
         code: 'phys',
-        type:TypeMatiere.SCIENTIFIQUE
+        type: TypeMatiere.SCIENTIFIQUE
     },
     {
         value: 'Histoire Géo',
         code: 'histg',
-        type:TypeMatiere.LITTERAIRE
+        type: TypeMatiere.LITTERAIRE
     },
     {
         value: 'Anglais',
         code: 'angl',
-        type:TypeMatiere.LITTERAIRE
+        type: TypeMatiere.LITTERAIRE
     },
     {
         value: 'Français',
         code: 'fran',
-        type:TypeMatiere.LITTERAIRE
+        type: TypeMatiere.LITTERAIRE
     },
     {
         value: 'Phylosophie',
         code: 'phylo',
-        type:TypeMatiere.LITTERAIRE
+        type: TypeMatiere.LITTERAIRE
     },
     {
         value: 'SVT',
         code: 'svt',
-        type:TypeMatiere.SCIENTIFIQUE
+        type: TypeMatiere.SCIENTIFIQUE
     },
     {
         value: 'Comptabilité',
         code: 'compt',
-        type:TypeMatiere.TECHNIQUE
+        type: TypeMatiere.TECHNIQUE
     },
     {
         value: 'Espagnol',
         code: 'espa',
-        type:TypeMatiere.LITTERAIRE
+        type: TypeMatiere.LITTERAIRE
     }
 ]
 export const communes = [
     {
         key: '46465',
-        nom:"Koumassi",
-        quartiers:["Remblais", "Sopim", "Prodomo","05","Sogephia","Marché","Camp Commando"]
+        nom: "Koumassi",
+        quartiers: ["Remblais", "Sopim", "Prodomo", "05", "Sogephia", "Marché", "Camp Commando"]
     },
     {
-        key:'Cocody',
-        nom:"Cocody",
-        quartiers:["Angré VII", "Angré Chateaux", "2 Plateaux", "Danga","Riviera Golf","Roviera II","Riviera III","Riviera Faya"]
+        key: 'Cocody',
+        nom: "Cocody",
+        quartiers: ["Angré VII", "Angré Chateaux", "2 Plateaux", "Danga", "Riviera Golf", "Roviera II", "Riviera III", "Riviera Faya"]
     },
     {
-        key:'Yopougon',
-        nom:"Yopougon",
-        quartiers:["Remblais", "Sopim", "Prodomo","05","Sogephia","Marché","Camp Commando"]
+        key: 'Yopougon',
+        nom: "Yopougon",
+        quartiers: ["Remblais", "Sopim", "Prodomo", "05", "Sogephia", "Marché", "Camp Commando"]
     },
     {
-        key:'Marcory',
-        nom:"Marcory",
-        quartiers:["Remblais", "Sainte-Thérèse", "Zone 4","Hibiscus","zone 3","Bietry","Résidentiel","Socogi"]
+        key: 'Marcory',
+        nom: "Marcory",
+        quartiers: ["Remblais", "Sainte-Thérèse", "Zone 4", "Hibiscus", "zone 3", "Bietry", "Résidentiel", "Socogi"]
     },
     {
-        key:'Treichville',
-        nom:"Treichville",
-        quartiers:["Remblais", "Sopim", "Prodomo","05","Sogephia","Marché","Camp Commando"]
+        key: 'Treichville',
+        nom: "Treichville",
+        quartiers: ["Remblais", "Sopim", "Prodomo", "05", "Sogephia", "Marché", "Camp Commando"]
     },
 ]

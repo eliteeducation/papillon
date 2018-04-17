@@ -5,10 +5,11 @@ import React from 'react';
 import { Switch, Route} from 'react-router-dom';
 import ClientList from "./ClientList/";
 import CreateClient from "./CreateClient/";
+import ClientDetail from "./ClientDetail/";
 
 import ClientNav from "./ClientsNav";
 
-import {clients, students} from '../../../services/database'
+import {clients} from '../../../services/database'
 
 const ClientsLayout = ({ match }) => {
     return (<div className="primary-layout">
@@ -16,7 +17,10 @@ const ClientsLayout = ({ match }) => {
         <main>
             <Switch>
                 <Route exact path={`${match.path}/`}  render={(props)=><ClientList {...props} clients={clients}/>}/>
-                <Route path={`${match.path}/create`} component={CreateClient}/>
+                <Route exact path={`${match.path}/create`} component={CreateClient}/>
+                <Route path={`${match.path}/:id`} component={ClientDetail}/>
+
+
             </Switch>
         </main>
     </div>)

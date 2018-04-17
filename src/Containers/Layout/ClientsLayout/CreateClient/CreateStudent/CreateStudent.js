@@ -14,12 +14,6 @@ class CreateStudent extends React.Component {
         });
     }
 
-    constructor(props) {
-        super(props);
-
-
-    }
-
     onSubmit = (event)=> {
         event.preventDefault();
         let {onSaveStudent} =this.props;
@@ -71,11 +65,7 @@ class CreateStudent extends React.Component {
 }
 
 CreateStudent.propTypes = {
-    // You can declare that a prop is a specific JS primitive. By default, these
-    // are all optional.
-    onSaveStudent: PropTypes.func.isRequired,
-    matieres: PropTypes.array.isRequired,
-
+    matieres: PropTypes.array.isRequired
 }
 
 export default CreateStudent;

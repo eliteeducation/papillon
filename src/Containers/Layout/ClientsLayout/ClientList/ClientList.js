@@ -2,7 +2,7 @@
  * Created by emma on 06/03/18.
  */
 import React from "react";
-import ReactTable from 'react-table';
+import ReactTable from "react-table";
 import {Card} from "reactstrap";
 import "react-table/react-table.css";
 
@@ -29,16 +29,17 @@ class ClientList extends React.PureComponent {
         this.state = {
             columns: [
                 {
-                    Header: "Name",
+                    Header: "Famille",
                     columns: [
                         {
-                            Header: "First Name",
-                            accessor: "firstName"
+                            Header: "Nom du client",
+                            id: "firstName",
+                            accessor: data => (<a href={`/app/clients/${data.clientId}`}> {data.lastName + ' ' + data.firstName}</a>)
                         },
                         {
-                            Header: "Last Name",
-                            id: "lastName",
-                            accessor: d => d.lastName
+                            Header: "Commune",
+                            accessor: "commune",
+
                         }
                     ]
                 },
@@ -52,21 +53,15 @@ class ClientList extends React.PureComponent {
                         {
                             Header: "Email",
                             accessor: "email"
-                        }
-                    ]
-                },
-                {
-                    Header: "Stats",
-                    columns: [
+                        },
                         {
-                            Header: "Visits",
+                            Header: "Visites effectuées",
                             accessor: "visits"
                         }
                     ]
                 }
             ],
-            rows: [],
-            expandedRowIds: [2, 5],
+            rows: []
         }
         ;
 
@@ -81,16 +76,39 @@ class ClientList extends React.PureComponent {
 
             });
         })
-
         return {
             rows: rows,
             columns: prevState.columns
         }
     }
 
-    /*TODO changer le second columns pour l'adapter au besoin du sous composant*/
     render() {
         const {rows, columns} = this.state;
+        const studentDataColumns = [
+            {
+                Header: "Informations sur les enfants",
+                columns: [
+                    {
+                        Header: "Nom de l'élève",
+                        id: "firstName",
+                        accessor: data =>( data.lastName + ' ' + data.firstName)
+                    },
+                    {
+                        Header: "Niveau",
+                        id: "level",
+
+                    },
+                    {
+                        Header: "Teléphone",
+                        accessor: "telOne"
+                    },
+                    {
+                        Header: "les Matières",
+                        accessor: "matieres"
+                    }
+                ]
+            }
+        ];
         return (
             <Card>
                 <ReactTable
@@ -98,27 +116,26 @@ class ClientList extends React.PureComponent {
                     columns={columns}
                     defaultPageSize={10}
                     className="-striped -highlight"
-                    SubComponent={RowDetail (columns)}>
-                   
+                    SubComponent={RowDetail(studentDataColumns)}>
+
                 </ReactTable>
             </Card>
         );
     }
 }
 
-const RowDetail =  columns => row => {
+const RowDetail = columns => row => {
     let students = row.original.students;
     if (students) {
+        let subTableData = Object.keys(students).map(key => students[key]);
+        console.log("sub table data : ", subTableData);
         return (
             <div style={{padding: "20px"}}>
-                <em>
-                    Enfants :
-                </em>
                 {students &&
                 <ReactTable
-                    data={Object.keys(students).map(key => students[key])}
+                    data={subTableData}
                     columns={columns}
-                    defaultPageSize={3}
+                    defaultPageSize={subTableData.length}
                     showPagination={false}
                 />
                 }

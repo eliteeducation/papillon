@@ -42,7 +42,7 @@ class CreateClient extends React.Component {
 
     render() {
         const {clientId} = this.state;
-        const {match} = this.props;
+
         if (clientId) {
             return <Redirect to={`/app/clients/`} />
         }

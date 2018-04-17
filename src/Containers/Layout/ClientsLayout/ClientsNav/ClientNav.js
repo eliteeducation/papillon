@@ -2,17 +2,44 @@ import React from "react";
 import {withRouter} from "react-router-dom";
 
 
-const ClientNav = withRouter( ({match})=> (
+class ClientNav extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            activeTab: props.location.pathname.endsWith("/create") ? 'createClient' : 'clientsList'
+        }
+    }
 
-    <nav className="navbar">
-        <ul className="nav nav-tabs">
-            <li className="nav-item">
-                <a className="nav-link" href={`${match.path}/create`}>Nouveau</a>
-            </li>
-            <li className="nav-item">
-                <a className="nav-link" href={`${match.path}/`}>Clients</a>
-            </li>
-        </ul>
-    </nav>
-));
-export default ClientNav
+    onTabSelected = tabName=>event=> {
+        this.setState({activeTab: tabName})
+    }
+    active = tabName=> {
+        const {activeTab} = this.state;
+        if (activeTab === tabName) return "active";
+        return ""
+    }
+
+    render() {
+        const {match} = this.props;
+        return (<nav className="navbar">
+            <ul className="nav nav-pills">
+                <li className="nav-item">
+                    <a name="clientsList" className={`nav-link ${this.active("clientsList")}`}
+                       onClick={e=>this.onTabSelected("clientsList")} href={`${match.path}/`}>Clients</a>
+                </li>
+                <li className="nav-item">
+                    <a name="createClient" className={`nav-link ${this.active("createClient")}`}
+                       onClick={e=>this.onTabSelected("createClient")}
+                       href={`${match.path}/create`}>Nouveau</a>
+                </li>
+
+                <li hidden className="nav-item">
+                    <div name="createClient" className={`nav-link ${this.active("createClient")}`}
+                       onClick={e=>this.onTabSelected("createClient")}>Détails</div>
+                </li>
+            </ul>
+        </nav>)
+    }
+}
+;
+export default withRouter(ClientNav);
