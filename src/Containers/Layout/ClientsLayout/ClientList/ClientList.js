@@ -16,7 +16,6 @@ class ClientList extends React.PureComponent {
             });
             this.setState({rows})
         })
-
         props.clients.on('value', snapshot => {
             let rows = []
             snapshot.forEach((data) => {
@@ -25,51 +24,72 @@ class ClientList extends React.PureComponent {
             this.setState({rows})
         });
         this.state = {
-            columns: [
-                {
-                    Header: "Famille",
-                    columns: [
-                        {
-                            Header: "Nom du client",
-                            id: "firstName",
-                            accessor: data => (<a onClick={this.onClickDetail(data)} href={`/app/clients/${data.clientId}`}> {data.lastName + ' ' + data.firstName}</a>)
-                        },
-                        {
-                            Header: "Commune",
-                            accessor: "commune",
-
-                        }
-                    ]
-                },
-                {
-                    Header: "Info",
-                    columns: [
-                        {
-                            Header: "Teléphone",
-                            accessor: "telOne"
-                        },
-                        {
-                            Header: "Email",
-                            accessor: "email"
-                        },
-                        {
-                            Header: "Visites effectuées",
-                            accessor: "visits"
-                        }
-                    ]
-                }
-            ],
+            columns: this.createMainTableColumns(),
             rows: []
-        }
-        ;
-
+        };
     }
+
+    render() {
+        const {rows, columns, showClientDetail,clientData} = this.state;
+        if(showClientDetail===true)  {
+            return <Redirect to={{pathname: `/app/clients/${clientData.clientId}`, state: clientData}}/>
+        };
+
+        return (
+            <Card>
+                <ReactTable
+                    data={rows}
+                    columns={columns}
+                    defaultPageSize={10}
+                    className="-striped -highlight"
+                    SubComponent={RowDetail( this.createStudentsTabbleColumns())}>
+                </ReactTable>
+            </Card>
+        );
+    }
+
     onClickDetail = (data)=> (event)=>{
         event.preventDefault();
         this.setState({
             showClientDetail:true,
             clientData:data
         })
+    }
+    createMainTableColumns = ()=>{
+        return [
+            {
+                Header: "Famille",
+                columns: [
+                    {
+                        Header: "Nom du client",
+                        id: "firstName",
+                        accessor: data => (<a onClick={this.onClickDetail(data)} href={`/app/clients/${data.clientId}`}> {data.lastName + ' ' + data.firstName}</a>)
+                    },
+                    {
+                        Header: "Commune",
+                        accessor: "commune",
+
+                    }
+                ]
+            },
+            {
+                Header: "Info",
+                columns: [
+                    {
+                        Header: "Teléphone",
+                        accessor: "telOne"
+                    },
+                    {
+                        Header: "Email",
+                        accessor: "email"
+                    },
+                    {
+                        Header: "Visites effectuées",
+                        accessor: "visits"
+                    }
+                ]
+            }
+        ];
     }
     static getDerivedStateFromProps(nextProps, prevState) {
         console.log("prev state : ", prevState)
@@ -86,50 +106,32 @@ class ClientList extends React.PureComponent {
         }
     }
 
-    render() {
-        const {rows, columns, showClientDetail,clientData} = this.state;
-        if(showClientDetail===true)  {
-            return <Redirect to={{pathname: `/app/clients/${clientData.clientId}`, state: clientData}}/>
-        };
 
-        const studentDataColumns = [
-            {
-                Header: "Informations sur les enfants",
-                columns: [
-                    {
-                        Header: "Nom de l'élève",
-                        id: "firstName",
-                        accessor: data =>( data.lastName + ' ' + data.firstName)
-                    },
-                    {
-                        Header: "Niveau",
-                        id: "level",
+     createStudentsTabbleColumns = ()=> [
+        {
+            Header: "Informations sur les enfants",
+            columns: [
+                {
+                    Header: "Nom de l'élève",
+                    id: "firstName",
+                    accessor: data =>( data.lastName + ' ' + data.firstName)
+                },
+                {
+                    Header: "Niveau",
+                    id: "level",
 
-                    },
-                    {
-                        Header: "Teléphone",
-                        accessor: "telOne"
-                    },
-                    {
-                        Header: "les Matières",
-                        accessor: "matieres"
-                    }
-                ]
-            }
-        ];
-        return (
-            <Card>
-                <ReactTable
-                    data={rows}
-                    columns={columns}
-                    defaultPageSize={10}
-                    className="-striped -highlight"
-                    SubComponent={RowDetail(studentDataColumns)}>
-
-                </ReactTable>
-            </Card>
-        );
-    }
+                },
+                {
+                    Header: "Teléphone",
+                    accessor: "telOne"
+                },
+                {
+                    Header: "les Matières",
+                    accessor: "matieres"
+                }
+            ]
+        }
+    ];
 }
 
 const RowDetail = columns => row => {

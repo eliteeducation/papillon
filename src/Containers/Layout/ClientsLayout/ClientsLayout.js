@@ -7,19 +7,18 @@ import ClientList from "./ClientList/";
 import CreateClient from "./CreateClient/";
 import ClientDetail from "./ClientDetail/";
 
-import ClientNav from "./ClientsNav";
+import ClientTabs from "./ClientTabs";
 
 import {clients} from '../../../services/database'
 
 const ClientsLayout = ({ match }) => {
     return (<div className="primary-layout">
-        <ClientNav />
+        <ClientTabs />
         <main>
             <Switch>
                 <Route exact path={`${match.path}/`}  render={(props)=><ClientList {...props} clients={clients}/>}/>
                 <Route exact path={`${match.path}/create`} component={CreateClient}/>
                 <Route path={`${match.path}/:id`} component={ClientDetail}/>
-
 
             </Switch>
         </main>

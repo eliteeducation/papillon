@@ -9,8 +9,6 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            key: 1,
-            ecole: '',
             signedIn: true
         };
 
@@ -47,7 +45,6 @@ class App extends Component {
 
     render() {
         let signedIn = this.state.signedIn
-        console.log("signed : ", signedIn)
         return (
             <Router>
                 <Switch>
