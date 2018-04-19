@@ -7,22 +7,30 @@ class ClientDetail extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            client:{}
-        }
-        clients.child(props.match.params.id).once('value', snapshot=> {
-            this.setState({client: snapshot.val()});
+
+        this.state = props.location.state
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        console.log("prev state : ", prevState)
+        console.log("prev props : ", nextProps)
+        let clientData = undefined;
+        clients.child(nextProps.match.params.id).once('value', snapshot=> {
+            clientData = snapshot.val();
         })
+        return {
+            clientData: clientData || {}
+        }
     }
 
 
     render() {
-        const {client} = this.state;
-        if (!client.clientId) return null;
+        const {clientData} = this.state;
+        if (!clientData ||!clientData.clientId) return null;
         return <div>
             <div className="container">
                 <div className="row">
-                    Détails du cliebnt {client.firstName}   {client.lastName}
+                    Détails du client : {clientData.firstName} {clientData.lastName}
                 </div>
             </div>
             <div className="container">

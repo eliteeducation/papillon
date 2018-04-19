@@ -5,7 +5,7 @@ import React from "react";
 import ReactTable from "react-table";
 import {Card} from "reactstrap";
 import "react-table/react-table.css";
-
+import {Redirect} from "react-router-dom";
 class ClientList extends React.PureComponent {
     constructor(props) {
         super(props);
@@ -20,9 +20,7 @@ class ClientList extends React.PureComponent {
         props.clients.on('value', snapshot => {
             let rows = []
             snapshot.forEach((data) => {
-
                 rows.push(data.val());
-
             });
             this.setState({rows})
         });
@@ -34,7 +32,7 @@ class ClientList extends React.PureComponent {
                         {
                             Header: "Nom du client",
                             id: "firstName",
-                            accessor: data => (<a href={`/app/clients/${data.clientId}`}> {data.lastName + ' ' + data.firstName}</a>)
+                            accessor: data => (<a onClick={this.onClickDetail(data)} href={`/app/clients/${data.clientId}`}> {data.lastName + ' ' + data.firstName}</a>)
                         },
                         {
                             Header: "Commune",
@@ -66,7 +64,13 @@ class ClientList extends React.PureComponent {
         ;
 
     }
-
+    onClickDetail = (data)=> (event)=>{
+        event.preventDefault();
+        this.setState({
+            showClientDetail:true,
+            clientData:data
+        })
+    }
     static getDerivedStateFromProps(nextProps, prevState) {
         console.log("prev state : ", prevState)
         let rows = []
@@ -83,7 +87,11 @@ class ClientList extends React.PureComponent {
     }
 
     render() {
-        const {rows, columns} = this.state;
+        const {rows, columns, showClientDetail,clientData} = this.state;
+        if(showClientDetail===true)  {
+            return <Redirect to={{pathname: `/app/clients/${clientData.clientId}`, state: clientData}}/>
+        };
+
         const studentDataColumns = [
             {
                 Header: "Informations sur les enfants",

@@ -11,13 +11,16 @@ class ClientNav extends React.PureComponent {
     }
 
     onTabSelected = tabName=>event=> {
-        this.setState({activeTab: tabName})
+        event.preventDefault();
+        this.setState({activeTab: tabName});
     }
+
     active = tabName=> {
         const {activeTab} = this.state;
         if (activeTab === tabName) return "active";
         return ""
     }
+
 
     render() {
         const {match} = this.props;
@@ -33,9 +36,9 @@ class ClientNav extends React.PureComponent {
                        href={`${match.path}/create`}>Nouveau</a>
                 </li>
 
-                <li hidden className="nav-item">
-                    <div name="createClient" className={`nav-link ${this.active("createClient")}`}
-                       onClick={e=>this.onTabSelected("createClient")}>Détails</div>
+                <li id="clientDetailsTab" className="nav-item d-none">
+                    <div name="clientDetails" className={`nav-link ${this.active("clientDetails")}`}
+                       onClick={e=>this.onTabSelected("clientDetails")}>Détails</div>
                 </li>
             </ul>
         </nav>)

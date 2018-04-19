@@ -17,13 +17,13 @@ firebase.initializeApp(config);
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
 
-        const displayName = user.displayName;
+       /* const displayName = user.displayName;
         const email = user.email;
         const emailVerified = user.emailVerified;
         const photoURL = user.photoURL;
         const isAnonymous = user.isAnonymous;
         const uid = user.uid;
-        const providerData = user.providerData;
+        const providerData = user.providerData;*/
 
     } else {
 
@@ -56,8 +56,6 @@ clients.on('child_added', child=> {
     console.log("added : ", child.val())
     let val = child.val();
     val.clientId = child.key;
-    // clients.ref(child.key+"/");
-    // console.log("ref client : ", firebase.database().ref("clients/" + child.key))
     firebase.database().ref("clients/" + child.key).set(val)
 })
 
